@@ -2,149 +2,321 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#000000">
-    <title>Приватный доступ • Только для своих</title>
-
-    <!-- Security 2026 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://i.postimg.cc https: data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
-
-    <!-- Preloads & fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Private Access | 18+</title>
+    
     <link rel="preload" as="image" href="https://i.postimg.cc/fyFS6Dt1/hf-20260201-130322-a7669d20-d5d8-478b-9cf7-8032068a0c40.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-        :root{--purple:#c026f0;--pink:#ff006e;--green:#00ff9d;--gold:#ffd700;--bg:#000;--text:#fff;--text-light:hsla(0,0%,100%,.88)}
-        @media (prefers-color-scheme:light){:root{--bg:#0a0a0a;--text:#f0f0f0}}
-        html,body{height:100%;min-height:-webkit-fill-available;background:var(--bg);color:var(--text);font-family:'Manrope',system-ui,sans-serif;overflow-x:hidden}
-        body{display:flex;flex-direction:column}
-        .bg-fixed{position:fixed;inset:0;z-index:-2;background:url('https://i.postimg.cc/fyFS6Dt1/hf-20260201-130322-a7669d20-d5d8-478b-9cf7-8032068a0c40.png') center/cover no-repeat fixed;opacity:.58;filter:brightness(.82) contrast(1.12)}
-        .overlay{position:fixed;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(0,0,0,.45) 0%,rgba(0,0,0,.94) 62%,#000 100%)}
-        .container{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem;padding-bottom:max(1.6rem,env(safe-area-inset-bottom));max-width:540px;margin:0 auto;width:100%}
-        .top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-top:env(safe-area-inset-top)}
-        .online{background:hsla(0,0%,100%,.09);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid hsla(0,0%,100%,.14);padding:.55rem 1.1rem;border-radius:999px;font-size:.9rem;font-weight:800;display:flex;align-items:center;gap:.6rem}
-        .dot{width:10px;height:10px;background:var(--green);border-radius:50%;box-shadow:0 0 14px var(--green);animation:pulse 2.4s infinite}
-        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.2)}}
-        .privacy{font-size:.8rem;font-weight:700;opacity:.75;letter-spacing:1.3px}
-        .geo{color:var(--green);font-weight:800;font-size:.95rem;text-transform:uppercase;letter-spacing:1.6px;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;text-shadow:0 0 14px hsla(165,100%,50%,.45)}
-        h1{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(3.5rem,13vw,5.2rem);line-height:.9;margin-bottom:.9rem;text-transform:uppercase;letter-spacing:-1.5px}
-        .desc{font-size:1.1rem;line-height:1.5;color:var(--text-light);margin:1rem 0 1.8rem;font-weight:500}
-        .desc b{color:var(--text);font-weight:800}
-        .teasers{display:flex;gap:1rem;overflow-x:auto;padding-bottom:.8rem;scrollbar-width:none}
-        .teasers::-webkit-scrollbar{display:none}
-        .teaser{flex:0 0 86px;aspect-ratio:1;border-radius:18px;background:#111;border:1px solid hsla(0,0%,100%,.12);overflow:hidden;position:relative;transition:transform .25s}
-        .teaser:hover{transform:scale(1.08)}
-        .teaser img{width:100%;height:100%;object-fit:cover;filter:blur(6px) brightness(.8);opacity:.92;transition:all .4s}
-        .teaser:hover img{filter:blur(1.5px) brightness(1.05);transform:scale(1.12)}
-        .lock{position:absolute;inset:0;display:grid;place-items:center;font-size:2.4rem;color:hsla(0,0%,100%,.75);z-index:1;pointer-events:none}
-        .cta-area{display:flex;flex-direction:column;gap:1.2rem}
-        .btn{display:flex;align-items:center;justify-content:center;width:100%;height:68px;border-radius:20px;font-weight:800;font-size:1.15rem;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;overflow:hidden;transition:all .2s}
-        .btn:active{transform:scale(.97)}
-        .btn svg{width:28px;height:28px;fill:currentColor;margin-right:.6rem}
-        .main-cta{background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 8px 32px rgba(192,38,240,.45);border:1px solid hsla(0,0%,100%,.2);animation:glow 3.2s infinite alternate}
-        @keyframes glow{0%{box-shadow:0 8px 32px rgba(192,38,240,.45)}100%{box-shadow:0 12px 48px rgba(255,0,110,.65)}}
-        .main-cta::after{content:'';position:absolute;inset:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent 40%,hsla(0,0%,100%,.25) 50%,transparent 60%);animation:shine 4s infinite}
-        @keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
-        .sec-btn{height:58px;font-size:1.05rem}
-        .green{background:hsla(165,100%,50%,.14);border:1px solid hsla(165,100%,50%,.32);color:var(--green)}
-        .gold{background:hsla(51,100%,50%,.14);border:1px solid hsla(51,100%,50%,.32);color:var(--gold)}
-        .timer-box{background:hsla(0,0%,10%,.7);backdrop-filter:blur(10px);border:1px solid hsla(0,0%,100%,.15);border-radius:16px;padding:1rem;margin:1.2rem 0;text-align:center;font-weight:800;font-size:1.3rem;color:#ff3b5c;text-shadow:0 0 12px #ff3b5c80}
-        .timer-box small{font-size:.85rem;opacity:.9;display:block;margin-top:.4rem}
-        @media (prefers-reduced-motion:reduce){.main-cta,.dot{animation:none}}
-        @media (max-width:400px){h1{font-size:clamp(3rem,11vw,4.2rem)}.teaser{flex:0 0 74px}.btn{height:62px;font-size:1.05rem}}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Manrope', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: url('https://i.postimg.cc/fyFS6Dt1/hf-20260201-130322-a7669d20-d5d8-478b-9cf7-8032068a0c40.png') center/cover no-repeat;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 50%, #000 100%);
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .top {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 10;
+        }
+
+        .online {
+            background: rgba(0,0,0,0.5);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #00E676;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00E676;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .content {
+            margin-bottom: 16px;
+        }
+
+        .geo {
+            color: #00E676;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(40px, 12vw, 60px);
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        h1 .accent {
+            color: #FF0055;
+        }
+
+        .desc {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .desc b {
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .item {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(4px);
+            opacity: 0.8;
+        }
+
+        .lock {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .item a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .btns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 800;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.1s;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-main {
+            background: linear-gradient(135deg, #FF0055, #FF00CC);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(255,0,85,0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.02); }
+            10% { transform: scale(1); }
+            15% { transform: scale(1.02); }
+            20% { transform: scale(1); }
+        }
+
+        .btn-sec {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
+            font-size: 14px;
+        }
+
+        .btn-gold {
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            color: #000;
+            font-weight: 900;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 42px; }
+            .btn { padding: 14px; font-size: 15px; }
+            .gallery { gap: 6px; }
+            .item { border-radius: 8px; }
+        }
+
+        @media (min-width: 768px) {
+            .main { max-width: 500px; }
+            h1 { font-size: 56px; }
+            .btn { padding: 18px; font-size: 17px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="bg-fixed"></div>
+<div class="bg"></div>
 <div class="overlay"></div>
 
-<div class="container">
-
-    <div class="top-bar">
-        <div class="online">
-            <div class="dot"></div>
-            <span id="online">92</span> смотрят сейчас
-        </div>
-        <div class="privacy">PRIVACY: ON</div>
+<div class="top">
+    <div class="online">
+        <div class="dot"></div>
+        <span id="count">118</span>
     </div>
+    <div>PRIVACY: ON</div>
+</div>
 
-    <div class="main-content">
+<div class="main">
+    <div class="content">
         <div class="geo">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            ТЫ РЯДОМ СО МНОЙ?
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+            Ты рядом со мной?
         </div>
 
-        <h1>ВХОД ТОЛЬКО ДЛЯ СВОИХ <svg class="adult-icon" viewBox="0 0 50 50" aria-hidden="true"><circle cx="25" cy="25" r="23" stroke="#ff006e" stroke-width="4" fill="none"/><text x="50%" y="50%" text-anchor="middle" dy=".35em" font-family="Arial" font-weight="bold" font-size="22" fill="#ff006e">18+</text><line x1="10" y1="40" x2="40" y2="10" stroke="#ff006e" stroke-width="4"/></svg></h1>
+        <h1>Вход только<br>для <span class="accent">своих</span> 18+</h1>
 
-        <p class="desc">Всё без цензуры уже здесь.<br><b>Осталось 4 места бесплатно</b>.</p>
+        <p class="desc">
+            Залила сюда весь архив без цензуры.<br>
+            <b>Бесплатно для первых 100 человек.</b>
+        </p>
 
-        <div id="timer-box" class="timer-box">
-            <div id="countdown">Осталось: 04:59</div>
-            <small>Время действия акции</small>
-        </div>
-
-        <div class="teasers">
-            <div class="teaser"><span class="lock">🔒</span><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" loading="lazy" alt=""></div>
-            <div class="teaser"><span class="lock">🔒</span><img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" loading="lazy" alt=""></div>
-            <div class="teaser"><span class="lock">🔒</span><img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" loading="lazy" alt=""></div>
-            <div class="teaser"><span class="lock">🔒</span><img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" loading="lazy" alt=""></div>
+        <div class="gallery">
+            <div class="item">
+                <a href="https://t.me/+JP-STmmmSH1mZThi">
+                    <img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" alt="1">
+                    <div class="lock">🔒</div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="https://t.me/+JP-STmmmSH1mZThi">
+                    <img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" alt="2">
+                    <div class="lock">🔒</div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="https://t.me/+JP-STmmmSH1mZThi">
+                    <img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" alt="3">
+                    <div class="lock">🔒</div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="https://t.me/+JP-STmmmSH1mZThi">
+                    <img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" alt="4">
+                    <div class="lock">🔒</div>
+                </a>
+            </div>
         </div>
     </div>
 
-    <div class="cta-area">
-        <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn main-cta">
-            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-            ВРЫВАЙСЯ В ПРИВАТ 🔥
+    <div class="btns">
+        <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn btn-main">
+            ▶ ВРЫВАЙСЯ В ПРИВАТ 🔥
         </a>
-
-        <a href="https://t.me/lucky_bear_wins" class="btn sec-btn gold" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h2v2H7v-2zm8 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm0-8h2v2h-2v-2z"/></svg>
+        <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn btn-sec" target="_blank">
+            ПОДДЕРЖАТЬ МЕНЯ 💖
+        </a>
+        <a href="https://t.me/lucky_bear_wins" class="btn btn-gold" target="_blank">
             КРУТИ И ЗАБИРАЙ 🎰
-        </a>
-
-        <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn sec-btn green" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            ПОДДЕРЖАТЬ 💖
         </a>
     </div>
 </div>
 
 <script>
-// Online counter (реалистичнее)
-const onlineEl = document.getElementById('online');
-let online = 92;
+const c = document.getElementById('count');
+let n = 118;
 setInterval(() => {
-    online += Math.floor(Math.random() * 5) - 2;
-    online = Math.max(78, Math.min(118, online));
-    onlineEl.textContent = online;
-}, 3800 + Math.random() * 4000);
-
-// Countdown timer (5 минут от загрузки — сильный urgency)
-const timerEl = document.getElementById('countdown');
-let timeLeft = 5 * 60; // 5 минут в секундах
-
-function updateTimer() {
-    if (timeLeft <= 0) {
-        timerEl.textContent = "Акция закончилась!";
-        timerEl.style.color = "#888";
-        return;
-    }
-    const min = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-    const sec = String(timeLeft % 60).padStart(2, '0');
-    timerEl.textContent = `Осталось: \( {min}: \){sec}`;
-    timeLeft--;
-}
-
-updateTimer();
-const timerInterval = setInterval(updateTimer, 1000);
+    n += Math.floor(Math.random() * 5) - 2;
+    if(n < 100) n = 110;
+    if(n > 140) n = 130;
+    c.innerText = n;
+}, 2000);
 </script>
+
 </body>
-        </html>
+    </html>
