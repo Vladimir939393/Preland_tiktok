@@ -2,211 +2,277 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Приватный доступ</title>
-    
-    <!-- ПРЕДЗАГРУЗКА КАРТИНОК (Чтобы быстрее грузились) -->
-    <link rel="preload" as="image" href="https://files.catbox.moe/54nu8y.jpg">
-    <link rel="preload" as="image" href="https://files.catbox.moe/qnrlwa.jpg">
 
-    <!-- ШРИФТЫ -->
+    <!-- Security Headers (Vercel их поддерживает через _headers или meta-equiv) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://files.catbox.moe https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+
+    <!-- Performance & PWA basics -->
+    <link rel="preload" as="image" href="https://files.catbox.moe/54nu8y.jpg" imagesrcset="https://files.catbox.moe/54nu8y.jpg 1x">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- СБРОС --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         :root {
-            --purple: #BC13FE;
-            --pink: #FF0055;
-            --green: #00E676;
-            --gold: #FFD700;
+            --purple: #c026f0;
+            --pink: #ff006e;
+            --green: #00ff9d;
+            --gold: #ffd700;
+            --bg: #000;
+            --text: #fff;
+            --text-light: rgba(255,255,255,0.88);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #0a0a0a;
+                --text: #f0f0f0;
+            }
+        }
+
+        html, body {
+            height: 100%;
+            min-height: -webkit-fill-available;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Manrope', system-ui, sans-serif;
+            overflow-x: hidden;
         }
 
         body {
-            background: #000;
-            color: #fff;
-            font-family: 'Manrope', sans-serif;
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            overflow-y: auto; 
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-        }
-
-        html {
-            height: -webkit-fill-available;
-        }
-
-        /* --- ФОН (CATBOX ССЫЛКА) --- */
-        .bg-fixed {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
-            background: #111;
-            /* ТВОЙ CATBOX ФОН */
-            background-image: url('https://files.catbox.moe/54nu8y.jpg');
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
             background-attachment: fixed;
-            opacity: 0.6;
-        }
-        
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 70%, #000 100%);
         }
 
-        /* --- ГЛАВНЫЙ КОНТЕЙНЕР --- */
+        .bg-fixed {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: url('https://files.catbox.moe/54nu8y.jpg') center/cover no-repeat fixed;
+            opacity: 0.55;
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.92) 65%, #000 100%);
+        }
+
         .app-container {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px;
-            padding-bottom: max(20px, env(safe-area-inset-bottom));
-            width: 100%;
-            max-width: 500px;
+            padding: 1.5rem;
+            padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+            max-width: 520px;
             margin: 0 auto;
+            width: 100%;
         }
 
-        /* ВЕРХНИЙ БАР */
         .top-header {
-            display: flex; justify-content: space-between; align-items: center;
-            width: 100%;
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.8rem;
             padding-top: env(safe-area-inset-top);
         }
 
         .online-badge {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: flex; align-items: center; gap: 8px;
-            font-size: 13px; font-weight: 800;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        .dot { width: 8px; height: 8px; background: #00FF41; border-radius: 50%; box-shadow: 0 0 8px #00FF41; animation: blink 2s infinite; }
-        .privacy { font-size: 11px; font-weight: 700; opacity: 0.6; letter-spacing: 1px; }
 
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .dot {
+            width: 9px;
+            height: 9px;
+            background: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--green);
+            animation: pulse-dot 2.2s infinite;
+        }
 
-        /* КОНТЕНТ */
-        .main-content {
-            margin-bottom: 25px;
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.5; transform: scale(1.15); }
+        }
+
+        .privacy {
+            font-size: 0.75rem;
+            font-weight: 700;
+            opacity: 0.7;
+            letter-spacing: 1.2px;
         }
 
         .geo-text {
             color: var(--green);
-            font-weight: 800; font-size: 13px; letter-spacing: 1px;
-            text-transform: uppercase; margin-bottom: 8px;
-            text-shadow: 0 0 15px rgba(0,230,118,0.4);
-            display: flex; align-items: center; gap: 5px;
+            font-weight: 800;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-shadow: 0 0 12px rgba(0,255,157,0.4);
         }
 
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 56px;
-            line-height: 0.95;
-            margin-bottom: 12px;
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(3.2rem, 12vw, 4.8rem);
+            line-height: 0.92;
+            margin-bottom: 0.8rem;
             text-transform: uppercase;
-            color: #fff;
+            letter-spacing: -1px;
         }
-        
+
         .adult-icon {
-            display: inline-block;
+            width: 48px;
+            height: 48px;
+            margin-left: 0.4rem;
             vertical-align: middle;
-            width: 44px;
-            height: 44px;
-            margin-left: 5px;
         }
 
         .desc {
-            font-size: 15px; line-height: 1.45;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.48;
+            color: var(--text-light);
+            margin-bottom: 1.6rem;
             font-weight: 500;
         }
-        
-        .desc b { color: #fff; font-weight: 800; }
 
-        /* ТИЗЕРЫ (Скролл) */
+        .desc b {
+            color: var(--text);
+            font-weight: 800;
+        }
+
         .teasers-scroll {
-            display: flex; gap: 10px;
+            display: flex;
+            gap: 0.8rem;
             overflow-x: auto;
-            padding-bottom: 5px;
-            -ms-overflow-style: none;
+            padding-bottom: 0.6rem;
             scrollbar-width: none;
         }
+
         .teasers-scroll::-webkit-scrollbar { display: none; }
-        
+
         .teaser {
-            flex: 0 0 auto;
-            width: 70px; height: 70px;
-            border-radius: 14px;
-            background: #222;
-            border: 1px solid rgba(255,255,255,0.15);
-            position: relative; overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-        }
-        
-        .teaser img { width: 100%; height: 100%; object-fit: cover; filter: blur(4px); opacity: 0.8; }
-        .lock-icon { position: absolute; font-size: 20px; z-index: 2; }
-
-        /* НИЖНИЙ БЛОК (КНОПКИ) */
-        .buttons-area {
-            display: flex; flex-direction: column; gap: 12px;
-            width: 100%;
-        }
-
-        /* СТИЛИ КНОПОК */
-        .btn {
-            width: 100%; height: 60px;
+            flex: 0 0 78px;
+            aspect-ratio: 1 / 1;
             border-radius: 16px;
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: white;
-            font-weight: 800; font-size: 17px; text-transform: uppercase;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
             position: relative;
-            transition: transform 0.1s;
-            cursor: pointer;
+            isolation: isolate;
         }
-        
-        .btn:active { transform: scale(0.97); }
-        .btn svg { width: 24px; height: 24px; margin-right: 12px; fill: currentColor; flex-shrink: 0; }
 
-        /* ГЛАВНАЯ */
+        .teaser img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(5px) brightness(0.85);
+            opacity: 0.9;
+            transition: filter 0.4s ease;
+        }
+
+        .teaser:hover img { filter: blur(2px) brightness(1); }
+
+        .lock-icon {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-size: 2.2rem;
+            color: rgba(255,255,255,0.7);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .btn {
+            width: 100%;
+            height: 62px;
+            border-radius: 18px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.18s ease;
+        }
+
+        .btn:active { transform: scale(0.98); }
+
+        .btn svg { width: 26px; height: 26px; fill: currentColor; }
+
         .btn-main {
             background: linear-gradient(135deg, var(--purple), var(--pink));
-            box-shadow: 0 4px 25px rgba(188,19,254,0.4);
-            border: 1px solid rgba(255,255,255,0.25);
-            animation: pulse 2s infinite;
-        }
-        
-        /* Блик */
-        .btn-main::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-            animation: shine 3.5s infinite;
+            box-shadow: 0 6px 28px rgba(192,38,240,0.35);
+            border: 1px solid rgba(255,255,255,0.18);
+            animation: glow 3s infinite alternate;
         }
 
-        /* ВТОРОСТЕПЕННЫЕ */
-        .btn-green { background: rgba(0, 230, 118, 0.15); border: 1px solid rgba(0, 230, 118, 0.3); color: var(--green); height: 54px; font-size: 15px; }
-        .btn-gold { background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.3); color: var(--gold); height: 54px; font-size: 15px; }
+        @keyframes glow {
+            0%   { box-shadow: 0 6px 28px rgba(192,38,240,0.35); }
+            100% { box-shadow: 0 8px 40px rgba(255,0,110,0.5); }
+        }
 
-        @keyframes pulse { 0% { box-shadow: 0 0 15px rgba(188,19,254,0.3); } 50% { box-shadow: 0 0 30px rgba(255,0,85,0.6); } 100% { box-shadow: 0 0 15px rgba(188,19,254,0.3); } }
-        @keyframes shine { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
+        .btn-green {
+            background: rgba(0,255,157,0.12);
+            border: 1px solid rgba(0,255,157,0.28);
+            color: var(--green);
+            height: 56px;
+            font-size: 1rem;
+        }
 
-        /* Media queries для мелких экранов */
-        @media (max-height: 600px) {
-            h1 { font-size: 42px; margin-bottom: 5px; }
-            .teaser { width: 55px; height: 55px; }
-            .btn { height: 48px; font-size: 14px; }
-            .btn-main { height: 54px; }
-            .desc { font-size: 13px; margin-bottom: 10px; }
+        .btn-gold {
+            background: rgba(255,215,0,0.12);
+            border: 1px solid rgba(255,215,0,0.28);
+            color: var(--gold);
+            height: 56px;
+            font-size: 1rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .btn-main { animation: none; }
+            .dot { animation: none; }
+        }
+
+        @media (max-width: 380px) {
+            h1 { font-size: clamp(2.8rem, 10vw, 3.8rem); }
+            .teaser { flex: 0 0 68px; }
+            .btn { height: 56px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -217,76 +283,81 @@
 
     <div class="app-container">
         
-        <!-- 1. ВЕРХ -->
         <div class="top-header">
             <div class="online-badge">
                 <div class="dot"></div>
-                <span id="counter">92</span>
+                <span id="counter">89</span> онлайн
             </div>
             <div class="privacy">PRIVACY: ON</div>
         </div>
 
-        <!-- 2. ЦЕНТР -->
         <div class="main-content">
             <div class="geo-text">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00E676"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                 ТЫ РЯДОМ СО МНОЙ?
             </div>
             
             <h1>
-                Вход только<br>для своих
-                <svg class="adult-icon" viewBox="0 0 50 50">
-                    <circle cx="25" cy="25" r="23" stroke="#FF0055" stroke-width="4" fill="none"/>
-                    <text x="50%" y="50%" text-anchor="middle" dy=".35em" font-family="Arial" font-weight="bold" font-size="22" fill="#FF0055">18+</text>
-                    <line x1="10" y1="40" x2="40" y2="10" stroke="#FF0055" stroke-width="4" />
+                ВХОД ТОЛЬКО<br>ДЛЯ СВОИХ
+                <svg class="adult-icon" viewBox="0 0 50 50" aria-hidden="true">
+                    <circle cx="25" cy="25" r="23" stroke="#ff006e" stroke-width="4" fill="none"/>
+                    <text x="50%" y="50%" text-anchor="middle" dy=".35em" font-family="Arial" font-weight="bold" font-size="22" fill="#ff006e">18+</text>
+                    <line x1="10" y1="40" x2="40" y2="10" stroke="#ff006e" stroke-width="4"/>
                 </svg>
             </h1>
             
             <p class="desc">
-                Залила сюда весь архив без цензуры.
-                <br><b>Бесплатно для первых 100 человек.</b>
+                Весь архив <b>без цензуры</b> здесь.<br>
+                <b>Бесплатно первым 100</b>.
             </p>
 
-            <!-- ТИЗЕРЫ (CATBOX ССЫЛКИ) -->
             <div class="teasers-scroll">
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/qnrlwa.jpg" alt="teaser1" loading="lazy"></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/yl82ho.jpg" alt="teaser2" loading="lazy"></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/fmr6xx.jpg" alt="teaser3" loading="lazy"></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/qilktg.jpg" alt="teaser4" loading="lazy"></div>
+                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/qnrlwa.jpg" alt="" loading="lazy"></div>
+                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/yl82ho.jpg" alt="" loading="lazy"></div>
+                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/fmr6xx.jpg" alt="" loading="lazy"></div>
+                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/qilktg.jpg" alt="" loading="lazy"></div>
             </div>
         </div>
 
-        <!-- 3. КНОПКИ -->
-        <div class="buttons-area">
-            
+        <div class="buttons-area" style="display:flex; flex-direction:column; gap:1rem;">
             <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn btn-main">
                 <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
                 ВРЫВАЙСЯ В ПРИВАТ 🔥
             </a>
 
-            <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn btn-green" target="_blank">
+            <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn btn-green" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 ПОДДЕРЖАТЬ МЕНЯ 💖
             </a>
 
-            <a href="https://t.me/lucky_bear_wins" class="btn btn-gold" target="_blank">
+            <a href="https://t.me/lucky_bear_wins" class="btn btn-gold" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h2v2H7v-2zm8 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm0-8h2v2h-2v-2z"/></svg>
                 КРУТИ И ЗАБИРАЙ 🎰
             </a>
-
         </div>
     </div>
 
     <script>
-        const c = document.getElementById('counter');
-        let n = 92;
-        function upd() {
-            n += Math.floor(Math.random() * 5) - 2;
-            if (n < 85) n = 88;
-            if (n > 105) n = 101;
-            c.innerText = n;
+        // Более плавный и реалистичный счётчик
+        const counter = document.getElementById('counter');
+        let count = 89;
+        let direction = 1;
+
+        function updateCounter() {
+            const change = Math.floor(Math.random() * 3) - 1; // -1, 0, +1
+            count += change * direction;
+            
+            // Держим в разумных пределах
+            if (count < 78) { count = 78; direction = 1; }
+            if (count > 108) { count = 108; direction = -1; }
+            
+            counter.textContent = count;
         }
-        setInterval(upd, 3000);
+
+        const interval = setInterval(updateCounter, 4500 + Math.random() * 3000);
+
+        // Очистка при уходе со страницы (опционально)
+        window.addEventListener('beforeunload', () => clearInterval(interval));
     </script>
 </body>
-                    </html>
+        </html>
