@@ -2,395 +2,398 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <!-- Оптимизация под мобильные экраны, запрет зума -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Приватный доступ | Limited Access</title>
+    <title>Приватный доступ 🔞</title>
     <meta name="theme-color" content="#000000">
-    <meta name="description" content="Exclusive private access. 18+ only.">
+    
+    <!-- ПРЕДЗАГРУЗКА ФОНА (ускоряет загрузку) -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?q=80&w=1964">
 
-    <!-- 1. ПРЕДЗАГРУЗКА ФОНА (ЧТОБЫ НЕ БЫЛО ЧЕРНОГО ЭКРАНА) -->
-    <!-- ВНИМАНИЕ: Сюда вставь ту же ссылку на фото, что и в style ниже -->
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?q=80&w=1964&auto=format&fit=crop">
-
-    <!-- ШРИФТЫ (Кинетика и Читаемость) -->
+    <!-- ШРИФТЫ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- НАСТРОЙКИ ЦВЕТОВ 2026 --- */
         :root {
-            --neon-accent: #BC13FE; /* Основной неон (Фиолет) */
-            --neon-pink: #FF0055;   /* Акцент (Розовый) */
-            --donate-green: #00E676;
-            --casino-gold: #FFD700;
-            --glass-bg: rgba(20, 20, 30, 0.75);
-            --bg-color: #050505;
+            --purple: #BC13FE;
+            --pink: #FF0055;
+            --green: #00E676;
+            --gold: #FFD700;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
         
         body {
-            background: var(--bg-color);
-            color: white;
+            background: #000;
+            color: #fff;
             font-family: 'Manrope', sans-serif;
-            overflow-x: hidden; /* Убираем боковой скролл */
             height: 100vh;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* --- ФОН (САМОЕ ВАЖНОЕ) --- */
-        .bg-layer {
+        /* ФОН С АНИМАЦИЕЙ */
+        .bg {
             position: fixed;
             inset: 0;
             z-index: -2;
-            
-            /* 2. СЮДА ВСТАВЬ ССЫЛКУ НА ФОТО МОДЕЛИ */
-            background: url('https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?q=80&w=1964&auto=format&fit=crop') center/cover no-repeat;
-            
-            opacity: 0.65; /* Затемнение фото (0.1 - темно, 1.0 - светло) */
-            filter: brightness(0.7) contrast(1.1); /* Цветокоррекция CSS */
-            animation: kenBurns 25s ease-in-out infinite alternate;
+            /* 1. ЗАМЕНИ ЭТУ ССЫЛКУ НА СВОЕ ФОТО МОДЕЛИ */
+            background: url('https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?q=80&w=1964') center/cover no-repeat;
+            opacity: 0.65;
+            filter: brightness(0.7) contrast(1.15);
+            animation: zoom 30s ease-in-out infinite alternate;
         }
         
-        /* Градиент снизу, чтобы текст читался */
         .overlay {
             position: fixed;
             inset: 0;
             z-index: -1;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 60%, #000 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 70%, #000 100%);
         }
 
-        @keyframes kenBurns {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.15); }
+        @keyframes zoom { 
+            0% { transform: scale(1); } 
+            100% { transform: scale(1.12); } 
         }
 
-        /* --- КОНТЕЙНЕР --- */
-        .container {
-            padding: 24px;
-            max-width: 480px; /* Ширина мобилки */
-            margin: 0 auto;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            min-height: 100dvh;
-            padding-bottom: 230px; /* Место под 3 кнопки */
-        }
-
-        /* СТАТУС БАР (Сверху) */
-        .status-bar {
+        /* ВЕРХНЯЯ ПАНЕЛЬ */
+        .top {
             position: absolute;
-            top: 15px;
+            top: 18px;
             left: 20px;
             right: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 1px;
             text-transform: uppercase;
-            opacity: 0.9;
         }
 
-        .online-badge {
+        .live {
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(0,0,0,0.6);
-            padding: 5px 10px;
-            border-radius: 30px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 12px;
+            border-radius: 25px;
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
         }
 
         .dot {
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             background: #00FF41;
             border-radius: 50%;
-            box-shadow: 0 0 8px #00FF41;
-            animation: pulseDot 2s infinite;
+            box-shadow: 0 0 10px #00FF41;
+            animation: blink 2s infinite;
         }
 
-        /* ТЕКСТЫ */
+        @keyframes blink { 
+            0%, 100% { opacity: 1; } 
+            50% { opacity: 0.3; } 
+        }
+
+        /* КОНТЕНТ */
+        .content {
+            position: absolute;
+            bottom: 250px;
+            left: 0;
+            right: 0;
+            padding: 0 24px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .geo {
+            color: var(--green);
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+            text-shadow: 0 0 12px rgba(0,230,118,0.5);
+        }
+
         h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(44px, 14vw, 64px); /* Адаптивный размер */
-            line-height: 0.95;
-            margin-bottom: 12px;
+            font-size: clamp(50px, 13vw, 62px);
+            line-height: 0.98;
+            margin-bottom: 14px;
             text-transform: uppercase;
-            /* Текстовый градиент "Серебро" */
-            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+            background: linear-gradient(180deg, #fff 20%, #aaa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+            letter-spacing: 0.5px;
         }
 
-        .geo-text {
-            color: var(--donate-green);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 13px;
-            margin-bottom: 8px;
-            display: block;
-            text-shadow: 0 0 10px rgba(0, 230, 118, 0.4);
-        }
-
-        .subtitle {
+        .desc {
             font-size: 15px;
-            line-height: 1.5;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 25px;
-            font-weight: 400;
+            line-height: 1.55;
+            color: rgba(255,255,255,0.88);
+            margin-bottom: 22px;
+            font-weight: 500;
         }
-        .subtitle b { color: white; font-weight: 700; }
 
-        /* --- ТИЗЕРЫ (ФОТО С ЗАМКАМИ) --- */
+        .desc b {
+            color: #fff;
+            font-weight: 800;
+        }
+
+        /* ТИЗЕРЫ */
         .teasers {
             display: flex;
-            gap: 12px;
-            margin-bottom: 15px;
-            overflow-x: auto; /* Скролл если не влезают */
-            padding-bottom: 5px;
+            gap: 11px;
+            overflow-x: auto;
+            padding-bottom: 8px;
         }
-        
-        .teaser-item {
-            min-width: 75px;
-            height: 75px;
-            border-radius: 14px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        .box {
+            min-width: 72px;
+            height: 72px;
+            border-radius: 13px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
             position: relative;
             overflow: hidden;
         }
-        
-        .teaser-item img { 
-            width: 100%; height: 100%; 
-            object-fit: cover; 
-            filter: blur(4px); /* БЛЮР КАРТИНОК */
-            opacity: 0.8; 
-            transition: 0.3s;
-        }
-        
-        .lock-icon { 
-            position: absolute; 
-            font-size: 20px; 
-            z-index: 2; 
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); 
+
+        .box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(6px);
+            opacity: 0.75;
         }
 
-        /* --- КНОПКИ (ПАНЕЛЬ УПРАВЛЕНИЯ) --- */
-        .buttons-wrapper {
+        .lock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 22px;
+            z-index: 2;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.9));
+        }
+
+        /* КНОПКИ */
+        .btns {
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
-            padding: 20px 20px 30px;
-            /* Градиент подложка чтобы кнопки читались на любом фоне */
-            background: linear-gradient(to top, #000 40%, rgba(0,0,0,0));
+            right: 0;
+            padding: 22px 20px 32px;
+            background: linear-gradient(to top, #000 40%, transparent);
             z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Расстояние между кнопками */
+            gap: 11px;
             align-items: center;
         }
 
         .btn {
             width: 100%;
             max-width: 450px;
-            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            font-weight: 800;
+            gap: 11px;
             text-decoration: none;
-            color: white;
+            color: #fff;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
+            border-radius: 15px;
+            transition: transform 0.12s;
+            font-size: 16px;
+        }
+
+        .btn:active { 
+            transform: scale(0.96); 
+        }
+
+        /* ИКОНКИ (ИСПРАВЛЕНЫ!) */
+        .btn svg {
+            width: 21px;
+            height: 21px;
+            flex-shrink: 0;
+        }
+
+        /* ГЛАВНАЯ КНОПКА */
+        .main {
+            height: 62px;
+            font-size: 18px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 6px 25px rgba(188,19,254,0.35);
+            animation: glow 2.8s infinite;
             position: relative;
             overflow: hidden;
-            transition: transform 0.1s;
         }
 
-        .btn:active { transform: scale(0.97); } /* Эффект нажатия */
-        .btn svg { width: 20px; height: 20px; fill: currentColor; }
-
-        /* 1. ПРИВАТ (САМАЯ ГЛАВНАЯ) */
-        .btn-main {
-            height: 60px;
-            font-size: 18px;
-            background: linear-gradient(135deg, var(--neon-accent), var(--neon-pink));
-            box-shadow: 0 8px 30px rgba(188, 19, 254, 0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-            animation: glowPulse 2.5s infinite; /* ПУЛЬСАЦИЯ */
-            margin-bottom: 4px;
-        }
-        
-        /* Блик на кнопке */
-        .btn-main::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(45deg); animation: shine 4s infinite;
+        .main::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+            animation: shine 4s infinite;
         }
 
-        /* 2. ДОНАТ (ВТОРОСТЕПЕННАЯ) */
-        .btn-donate {
-            height: 52px;
+        @keyframes glow { 
+            0%, 100% { box-shadow: 0 0 15px rgba(188,19,254,0.25); } 
+            50% { box-shadow: 0 0 35px rgba(255,0,85,0.55); } 
+        }
+
+        @keyframes shine { 
+            0% { transform: translateX(-100%) rotate(45deg); } 
+            100% { transform: translateX(100%) rotate(45deg); } 
+        }
+
+        /* ВТОРИЧНЫЕ КНОПКИ */
+        .donate {
+            height: 54px;
             font-size: 15px;
-            background: rgba(0, 230, 118, 0.1);
-            border: 1px solid rgba(0, 230, 118, 0.3);
-            color: var(--donate-green);
-            backdrop-filter: blur(8px);
+            background: rgba(0,230,118,0.12);
+            border: 1px solid rgba(0,230,118,0.35);
+            color: var(--green);
+            backdrop-filter: blur(10px);
         }
 
-        /* 3. КАЗИНО (ВТОРОСТЕПЕННАЯ) */
-        .btn-casino {
-            height: 52px;
+        .casino {
+            height: 54px;
             font-size: 15px;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            color: var(--casino-gold);
-            backdrop-filter: blur(8px);
+            background: rgba(255,215,0,0.12);
+            border: 1px solid rgba(255,215,0,0.35);
+            color: var(--gold);
+            backdrop-filter: blur(10px);
         }
-
-        /* Анимации */
-        @keyframes pulseDot { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-        @keyframes glowPulse { 0% { box-shadow: 0 0 15px rgba(188, 19, 254, 0.2); } 50% { box-shadow: 0 0 35px rgba(255, 0, 85, 0.5); } 100% { box-shadow: 0 0 15px rgba(188, 19, 254, 0.2); } }
-        @keyframes shine { 0% { left: -100%; } 20% { left: 100%; } 100% { left: 100%; } }
-
-        /* Лоадер при загрузке - ВЫПИЛИЛ НАХУЙ, БОЛЬШЕ НЕ ПОВИСНЕТ */
     </style>
 </head>
 <body>
-    
-    <!-- ФОНОВЫЙ СЛОЙ -->
-    <div class="bg-layer"></div>
-    <!-- СЛОЙ ЗАТЕМНЕНИЯ -->
+
+    <!-- ФОН -->
+    <div class="bg"></div>
     <div class="overlay"></div>
 
     <!-- ВЕРХНЯЯ СТРОКА -->
-    <div class="status-bar">
-        <div class="online-badge">
+    <div class="top">
+        <div class="live">
             <div class="dot"></div>
-            <!-- СЧЕТЧИК ОНЛАЙНА -->
-            <span id="viewerCount">48,291</span>
+            <span id="counter">48,286</span>
         </div>
-        <div style="opacity:0.6; font-size: 10px;">PRIVACY: ON</div>
+        <div style="opacity: 0.65; font-size: 10px;">PRIVACY: ON</div>
     </div>
 
-    <!-- КОНТЕНТ ПО ЦЕНТРУ -->
-    <div class="container">
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="content">
+        <span class="geo" id="geo">📍 ТЫ РЯДОМ СО МНОЙ?</span>
         
-        <!-- ГЕО: СКРИПТ САМ ПОДСТАВИТ ГОРОД -->
-        <span class="geo-text" id="geoLoc">📍 ТЫ РЯДОМ СО МНОЙ?</span>
-        
-        <!-- ЗАГОЛОВОК -->
         <h1>Вход только<br>для своих 🔞</h1>
         
-        <!-- ПОДЗАГОЛОВОК -->
-        <p class="subtitle">
+        <p class="desc">
             Залила сюда весь архив без цензуры, который удаляют в TikTok.
             <br><b>Бесплатно для первых 100 человек.</b>
         </p>
 
-        <!-- ТИЗЕРЫ (МАЛЕНЬКИЕ ФОТО) -->
+        <!-- 2. ЗАМЕНИ ССЫЛКИ НА СВОИ ФОТО (код сам их заблюрит) -->
         <div class="teasers">
-            <!-- 3. ЗАМЕНИ ССЫЛКИ НИЖЕ НА СВОИ КАРТИНКИ (МОЖНО СКРИНЫ ИЗ ВИДЕО) -->
-            <!-- Код сам их размоет (blur) -->
-            <div class="teaser-item">
-                <span class="lock-icon">🔒</span>
-                <img src="https://images.unsplash.com/photo-1596451190630-186aff535bf2?q=80&w=200" alt="Hidden">
+            <div class="box">
+                <span class="lock">🔒</span>
+                <img src="https://images.unsplash.com/photo-1596451190630-186aff535bf2?w=150" alt="">
             </div>
-            <div class="teaser-item">
-                <span class="lock-icon">🔒</span>
-                <img src="https://images.unsplash.com/photo-1620553835677-78972e39178f?q=80&w=200" alt="Hidden">
+            <div class="box">
+                <span class="lock">🔒</span>
+                <img src="https://images.unsplash.com/photo-1620553835677-78972e39178f?w=150" alt="">
             </div>
-            <div class="teaser-item">
-                <span class="lock-icon">🔒</span>
-                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=200" alt="Hidden">
+            <div class="box">
+                <span class="lock">🔒</span>
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150" alt="">
             </div>
-             <div class="teaser-item">
-                <span class="lock-icon">🔒</span>
-                <img src="https://images.unsplash.com/photo-1520183802803-06f731a2059f?q=80&w=200" alt="Hidden">
+            <div class="box">
+                <span class="lock">🔒</span>
+                <img src="https://images.unsplash.com/photo-1520183802803-06f731a2059f?w=150" alt="">
             </div>
         </div>
     </div>
 
-    <!-- НИЖНЯЯ ПАНЕЛЬ С КНОПКАМИ -->
-    <div class="buttons-wrapper">
+    <!-- КНОПКИ -->
+    <div class="btns">
         
-        <!-- 4. КНОПКА 1: ПРИВАТ (ГЛАВНАЯ) - ЗАМЕНИ HREF -->
-        <a href="https://t.me/YOUR_CHANNEL_LINK" class="btn btn-main" onclick="haptic()">
-            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        <!-- 3. ГЛАВНАЯ — ЗАМЕНИ ССЫЛКУ -->
+        <a href="https://t.me/YOUR_CHANNEL" class="btn main" onclick="vibe()">
+            <!-- Telegram самолетик -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
             ВРЫВАЙСЯ В ПРИВАТ 🔥
         </a>
 
-        <!-- 5. КНОПКА 2: ДОНАТ - ЗАМЕНИ HREF -->
-        <a href="https://your-donate-link.com" target="_blank" class="btn btn-donate">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <!-- 4. ДОНАТ — ЗАМЕНИ ССЫЛКУ -->
+        <a href="https://your-donate.link" class="btn donate" target="_blank">
+            <!-- Сердечко -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
             ПОДДЕРЖАТЬ МЕНЯ 💖
         </a>
 
-        <!-- 6. КНОПКА 3: КАЗИНО - ЗАМЕНИ HREF -->
-        <a href="https://casino-referral-link.com" target="_blank" class="btn btn-casino">
-            <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+        <!-- 5. КАЗИНО — ЗАМЕНИ ССЫЛКУ -->
+        <a href="https://casino-link.com" class="btn casino" target="_blank">
+            <!-- Фишка казино -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h2v2H7v-2zm8 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm0-8h2v2h-2v-2z"/>
+            </svg>
             КРУТИ И ЗАБИРАЙ 🎰
         </a>
 
     </div>
 
     <script>
-        // СКРИПТЫ СИСТЕМЫ
-
-        // 1. СТАРТ
-        window.addEventListener('load', () => {
-            initCounter();
-            initGeo();
-        });
-
-        // 2. Функция "Живой счетчик"
-        function initCounter() {
-            const counter = document.getElementById('viewerCount');
-            let count = 48291;
+        // АВТОЗАПУСК ПРИ ЗАГРУЗКЕ
+        (function() {
             
+            // 1. СЧЕТЧИК "ОНЛАЙН"
+            const cnt = document.getElementById('counter');
+            let num = 48286;
             setInterval(() => {
-                const change = Math.floor(Math.random() * 10) - 3;
-                count += change;
-                counter.innerText = count.toLocaleString('en-US');
-            }, 3000);
-        }
+                num += Math.floor(Math.random() * 10) - 3;
+                cnt.textContent = num.toLocaleString('en-US');
+            }, 3200);
 
-        // 3. НОВЫЙ БЕЗОПАСНЫЙ ГЕО-АПИ (БОЛЬШЕ НЕ ЗАВИСНЕТ)
-        function initGeo() {
-            // Ставим тайм-аут 1 секунду. Если API тупит - забиваем хуй и оставляем дефолтный текст
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 1500);
-
-            fetch('https://get.geojs.io/v1/ip/geo.json', { signal: controller.signal })
+            // 2. ГЕО-ЛОКАЦИЯ (С ЗАЩИТОЙ ОТ ЗАВИСАНИЯ)
+            const ctrl = new AbortController();
+            const timeout = setTimeout(() => ctrl.abort(), 1500);
+            
+            fetch('https://get.geojs.io/v1/ip/geo.json', { signal: ctrl.signal })
                 .then(r => r.json())
-                .then(data => {
-                    if(data.city) {
-                        document.getElementById('geoLoc').innerText = `📍 ТЫ ИЗ Г. ${data.city.toUpperCase()}?`;
+                .then(d => {
+                    clearTimeout(timeout);
+                    if (d.city) {
+                        document.getElementById('geo').textContent = `📍 ТЫ ИЗ Г. ${d.city.toUpperCase()}?`;
                     }
                 })
                 .catch(() => {
-                    console.log('Geo skip');
+                    clearTimeout(timeout);
+                    // Если API не ответил — оставляем дефолтный текст
                 });
-        }
 
-        // 4. Вибрация при клике (Только Android)
-        function haptic() {
+        })();
+
+        // 3. ВИБРАЦИЯ ПРИ КЛИКЕ (только на Android)
+        function vibe() {
             if (navigator.vibrate) navigator.vibrate(50);
         }
     </script>
+
 </body>
     </html>
