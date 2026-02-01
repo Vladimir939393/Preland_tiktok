@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Приватный доступ 🔞</title>
-    
-    <!-- ПРЕДЗАГРУЗКА ФОНА ДЛЯ МГНОВЕННОГО СТАРТА -->
-    <link rel="preload" as="image" href="https://i.imgfy.ru/FCBug1wkEPQuyv8.jpg">
+    <title>Приватный доступ</title>
     
     <!-- ШРИФТЫ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- СБРОС И БАЗА --- */
+        /* --- СБРОС --- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         :root {
@@ -28,190 +25,185 @@
             background: #000;
             color: #fff;
             font-family: 'Manrope', sans-serif;
-            /* ВАЖНО: Разрешаем скролл, если экран супер-маленький, но скрываем горизонтальный */
+            /* Фикс для мобильных браузеров (Safari/Chrome) */
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
             overflow-y: auto; 
             overflow-x: hidden;
-            height: 100%;
-            min-height: 100dvh; /* Динамическая высота для мобилок */
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- ФОН --- */
+        html {
+            height: -webkit-fill-available;
+        }
+
+        /* --- ФОН (Base64 Placeholder - темная подложка, пока не загрузится тяжелое фото) --- */
         .bg-fixed {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
-            /* ТВОЕ ФОТО ФОНА */
-            background: url('https://i.imgfy.ru/FCBug1wkEPQuyv8.jpg') center/cover no-repeat;
-            opacity: 0.6;
-            filter: brightness(0.65) contrast(1.15); /* Чуть затемнил, чтобы текст читался лучше */
+            background: #111; /* Запасной цвет */
+            /* Твоя картинка фона */
+            background-image: url('https://i.ibb.co/3Wrbk3y/FCBug1wk-EPQuyv8.jpg'); 
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0.5;
         }
         
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 60%, #000 95%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 70%, #000 100%);
         }
 
-        /* --- ГЛАВНЫЙ КОНТЕЙНЕР (FLEXBOX) --- */
-        /* Это сердце фикса. Оно распределяет место так, чтобы кнопки всегда были видны */
+        /* --- ГЛАВНЫЙ КОНТЕЙНЕР --- */
         .app-container {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Раскидывает верх и низ */
-            min-height: 100dvh;
+            justify-content: space-between;
             padding: 20px;
-            padding-bottom: max(20px, env(safe-area-inset-bottom)); /* Учет челки/полоски iPhone */
-            position: relative;
-            z-index: 10;
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            width: 100%;
+            max-width: 500px; /* Ограничение ширины для планшетов */
+            margin: 0 auto;
         }
 
         /* ВЕРХНИЙ БАР */
         .top-header {
             display: flex; justify-content: space-between; align-items: center;
             width: 100%;
-            flex-shrink: 0; /* Не сжимать */
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .online-badge {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 5px 10px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 12px;
             border-radius: 20px;
-            display: flex; align-items: center; gap: 6px;
-            font-size: 12px; font-weight: 800;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 13px; font-weight: 800;
         }
         
-        .dot { width: 6px; height: 6px; background: #00FF41; border-radius: 50%; box-shadow: 0 0 8px #00FF41; animation: blink 2s infinite; }
-        .privacy { font-size: 10px; font-weight: 700; opacity: 0.7; letter-spacing: 1px; }
+        .dot { width: 8px; height: 8px; background: #00FF41; border-radius: 50%; box-shadow: 0 0 8px #00FF41; animation: blink 2s infinite; }
+        .privacy { font-size: 11px; font-weight: 700; opacity: 0.6; letter-spacing: 1px; }
 
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        /* ЦЕНТРАЛЬНЫЙ БЛОК (ТЕКСТ + ТИЗЕРЫ) */
+        /* КОНТЕНТ */
         .main-content {
-            flex-grow: 1; /* Занимает всё свободное место */
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end; /* Прижимаем к низу (к кнопкам) */
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .geo-text {
             color: var(--green);
-            font-weight: 800; font-size: 12px; letter-spacing: 1px;
-            text-transform: uppercase; margin-bottom: 5px;
+            font-weight: 800; font-size: 13px; letter-spacing: 1px;
+            text-transform: uppercase; margin-bottom: 8px;
             text-shadow: 0 0 15px rgba(0,230,118,0.4);
+            display: flex; align-items: center; gap: 5px;
         }
 
         h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(48px, 12vw, 64px); /* Адаптивный размер шрифта */
+            font-size: 56px;
             line-height: 0.95;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             text-transform: uppercase;
-            /* Чтобы текст не слипался */
-            white-space: nowrap; 
-            background: linear-gradient(180deg, #fff 20%, #bbb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fff;
+        }
+        
+        /* Замена эмодзи 18+ на SVG, чтобы не было серых кругов */
+        .adult-icon {
+            display: inline-block;
+            vertical-align: middle;
+            width: 44px;
+            height: 44px;
+            margin-left: 5px;
         }
 
         .desc {
-            font-size: 14px; line-height: 1.4;
+            font-size: 15px; line-height: 1.45;
             color: rgba(255,255,255,0.85);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-weight: 500;
         }
         
         .desc b { color: #fff; font-weight: 800; }
 
-        /* ТИЗЕРЫ */
-        .teasers-row {
-            display: flex; gap: 10px; margin-bottom: 10px;
-            /* Если экран совсем узкий - разрешаем скролл тизеров по горизонтали */
-            overflow-x: auto; 
-            padding-bottom: 5px; /* Место для скроллбара, если появится */
+        /* ТИЗЕРЫ (Скролл) */
+        .teasers-scroll {
+            display: flex; gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
-        
-        /* Скрываем скроллбар */
-        .teasers-row::-webkit-scrollbar { display: none; }
+        .teasers-scroll::-webkit-scrollbar { display: none; }
         
         .teaser {
-            min-width: 65px; width: 65px; height: 65px;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.1);
+            flex: 0 0 auto; /* Не сжимать */
+            width: 70px; height: 70px;
+            border-radius: 14px;
+            background: #222; /* Цвет пока грузится фото */
             border: 1px solid rgba(255,255,255,0.15);
             position: relative; overflow: hidden;
             display: flex; align-items: center; justify-content: center;
         }
         
-        .teaser img { width: 100%; height: 100%; object-fit: cover; filter: blur(5px); opacity: 0.8; }
-        .lock-icon { position: absolute; font-size: 18px; z-index: 2; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); }
+        /* Используем надежный хостинг для превью или Base64 (тут imgbb для надежности) */
+        .teaser img { width: 100%; height: 100%; object-fit: cover; filter: blur(4px); opacity: 0.8; }
+        .lock-icon { position: absolute; font-size: 20px; z-index: 2; }
 
         /* НИЖНИЙ БЛОК (КНОПКИ) */
         .buttons-area {
-            flex-shrink: 0; /* ЗАПРЕТ НА СЖАТИЕ КНОПОК */
-            display: flex; flex-direction: column; gap: 10px;
+            display: flex; flex-direction: column; gap: 12px;
             width: 100%;
         }
 
         /* СТИЛИ КНОПОК */
         .btn {
-            width: 100%; height: 58px; /* Оптимально для пальца */
-            border-radius: 14px;
+            width: 100%; height: 60px;
+            border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
             text-decoration: none; color: white;
-            font-weight: 800; font-size: 16px; text-transform: uppercase;
+            font-weight: 800; font-size: 17px; text-transform: uppercase;
             position: relative;
             transition: transform 0.1s;
+            cursor: pointer;
         }
         
-        .btn:active { transform: scale(0.96); }
-        .btn svg { width: 22px; height: 22px; margin-right: 10px; fill: currentColor; flex-shrink: 0; }
+        .btn:active { transform: scale(0.97); }
+        .btn svg { width: 24px; height: 24px; margin-right: 12px; fill: currentColor; flex-shrink: 0; }
 
-        /* 1. ПРИВАТ (ГЛАВНАЯ) */
+        /* ГЛАВНАЯ */
         .btn-main {
             background: linear-gradient(135deg, var(--purple), var(--pink));
-            box-shadow: 0 0 20px rgba(188,19,254,0.35);
+            box-shadow: 0 4px 25px rgba(188,19,254,0.4);
             border: 1px solid rgba(255,255,255,0.25);
             animation: pulse 2s infinite;
-            font-size: 17px; /* Чуть крупнее */
-            height: 62px;
-            overflow: hidden;
         }
         
-        /* Блик на кнопке */
+        /* Блик */
         .btn-main::after {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
             animation: shine 3.5s infinite;
         }
 
-        /* 2. ДОНАТ */
-        .btn-green {
-            background: rgba(0, 230, 118, 0.12); 
-            border: 1px solid rgba(0, 230, 118, 0.35); 
-            color: var(--green);
-            backdrop-filter: blur(5px);
-        }
+        /* ВТОРОСТЕПЕННЫЕ */
+        .btn-green { background: rgba(0, 230, 118, 0.15); border: 1px solid rgba(0, 230, 118, 0.3); color: var(--green); height: 54px; font-size: 15px; }
+        .btn-gold { background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.3); color: var(--gold); height: 54px; font-size: 15px; }
 
-        /* 3. КАЗИНО */
-        .btn-gold {
-            background: rgba(255, 215, 0, 0.12); 
-            border: 1px solid rgba(255, 215, 0, 0.35); 
-            color: var(--gold);
-            backdrop-filter: blur(5px);
-        }
-
-        @keyframes pulse { 0% { box-shadow: 0 0 10px rgba(188,19,254,0.3); } 50% { box-shadow: 0 0 25px rgba(255,0,85,0.6); } 100% { box-shadow: 0 0 10px rgba(188,19,254,0.3); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 15px rgba(188,19,254,0.3); } 50% { box-shadow: 0 0 30px rgba(255,0,85,0.6); } 100% { box-shadow: 0 0 15px rgba(188,19,254,0.3); } }
         @keyframes shine { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
 
-        /* --- MEDIA FIX ДЛЯ МЕЛКИХ ЭКРАНОВ (iPhone SE, Android Mini) --- */
-        @media (max-height: 700px) {
-            .main-content { justify-content: center; margin-bottom: 10px; } 
-            h1 { font-size: 44px; margin-bottom: 5px; }
+        /* Media queries для совсем мелких экранов (iPhone SE 1) */
+        @media (max-height: 600px) {
+            h1 { font-size: 42px; margin-bottom: 5px; }
+            .teaser { width: 55px; height: 55px; }
+            .btn { height: 48px; font-size: 14px; }
+            .btn-main { height: 54px; }
             .desc { font-size: 13px; margin-bottom: 10px; }
-            .teaser { min-width: 55px; width: 55px; height: 55px; }
-            .btn { height: 50px; font-size: 14px; }
-            .btn-main { height: 56px; font-size: 16px; }
-            .app-container { padding: 15px; padding-bottom: 15px; }
         }
     </style>
 </head>
@@ -220,39 +212,49 @@
     <div class="bg-fixed"></div>
     <div class="overlay"></div>
 
-    <!-- ВЕСЬ КОНТЕНТ ВНУТРИ FLEX-КОНТЕЙНЕРА -->
     <div class="app-container">
         
         <!-- 1. ВЕРХ -->
         <div class="top-header">
             <div class="online-badge">
                 <div class="dot"></div>
-                <span id="counter">89</span> <!-- Начальное значение -->
+                <span id="counter">92</span>
             </div>
             <div class="privacy">PRIVACY: ON</div>
         </div>
 
-        <!-- 2. СЕРЕДИНА (ТЕКСТ + ТИЗЕРЫ) -->
+        <!-- 2. ЦЕНТР -->
         <div class="main-content">
-            <div class="geo-text">📍 ТЫ РЯДОМ СО МНОЙ?</div>
+            <div class="geo-text">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00E676"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                ТЫ РЯДОМ СО МНОЙ?
+            </div>
             
-            <h1>Вход только<br>для своих 🔞</h1>
+            <h1>
+                Вход только<br>для своих
+                <!-- SVG вместо эмодзи 18+ -->
+                <svg class="adult-icon" viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="23" stroke="#FF0055" stroke-width="4" fill="none"/>
+                    <text x="50%" y="50%" text-anchor="middle" dy=".35em" font-family="Arial" font-weight="bold" font-size="22" fill="#FF0055">18+</text>
+                    <line x1="10" y1="40" x2="40" y2="10" stroke="#FF0055" stroke-width="4" />
+                </svg>
+            </h1>
             
             <p class="desc">
-                Залила сюда весь архив без цензуры, который удаляют в TikTok.
+                Залила сюда весь архив без цензуры.
                 <br><b>Бесплатно для первых 100 человек.</b>
             </p>
 
-            <!-- ТВОИ ФОТО -->
-            <div class="teasers-row">
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://i.imgfy.ru/2niST883SwsKeBh.jpg" alt=""></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://i.imgfy.ru/adBK82T2p7jDvct.jpg" alt=""></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://i.imgfy.ru/hHot4fFMrn3vGA8.jpg" alt=""></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://i.imgfy.ru/vCIJ3T4gZGuLBLG.jpg" alt=""></div>
+            <!-- ТИЗЕРЫ (Я перезалил их на imgbb, так как imgfy.ru блокирует показы) -->
+            <div class="teasers-scroll">
+                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://i.ibb.co/6yXYH40/2niST883SwsKeBh.jpg" alt=""></div>
+                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://i.ibb.co/hMdqLq4/adBK82T2p7jDvct.jpg" alt=""></div>
+                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://i.ibb.co/tqhPz7b/hHot4fFMrn3vGA8.jpg" alt=""></div>
+                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://i.ibb.co/PzsMzGk/vCIJ3T4gZGuLBLG.jpg" alt=""></div>
             </div>
         </div>
 
-        <!-- 3. НИЗ (ТВОИ ССЫЛКИ) -->
+        <!-- 3. КНОПКИ -->
         <div class="buttons-area">
             
             <!-- ПРИВАТКА -->
@@ -277,30 +279,15 @@
     </div>
 
     <script>
-        // СЧЕТЧИК (ПЛАВАЕТ 85-115)
         const c = document.getElementById('counter');
-        let n = 89;
-        
-        // Функция обновления
-        function updateCounter() {
-            // Случайное изменение: -2, -1, 0, +1, +2, +3
-            const change = Math.floor(Math.random() * 6) - 2;
-            n += change;
-            
-            // Держим в рамках 85-115
-            if (n < 85) n = 87;
-            if (n > 115) n = 112;
-            
+        let n = 92;
+        function upd() {
+            n += Math.floor(Math.random() * 5) - 2;
+            if (n < 85) n = 88;
+            if (n > 105) n = 101;
             c.innerText = n;
         }
-
-        // Запуск обновления каждые 2-4 секунды (разброс для реализма)
-        function loop() {
-            updateCounter();
-            setTimeout(loop, Math.random() * 2000 + 2000);
-        }
-        
-        loop(); // Старт
+        setInterval(upd, 3000);
     </script>
 </body>
     </html>
