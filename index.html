@@ -3,361 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Приватный доступ</title>
+    <meta name="theme-color" content="#000000">
+    <title>Приватный доступ • Только для своих</title>
 
-    <!-- Security Headers (Vercel их поддерживает через _headers или meta-equiv) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://files.catbox.moe https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';">
+    <!-- Security 2026 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://i.postimg.cc https: data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
 
-    <!-- Performance & PWA basics -->
-    <link rel="preload" as="image" href="https://files.catbox.moe/54nu8y.jpg" imagesrcset="https://files.catbox.moe/54nu8y.jpg 1x">
+    <!-- Preloads & fonts -->
+    <link rel="preload" as="image" href="https://i.postimg.cc/fyFS6Dt1/hf-20260201-130322-a7669d20-d5d8-478b-9cf7-8032068a0c40.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        :root {
-            --purple: #c026f0;
-            --pink: #ff006e;
-            --green: #00ff9d;
-            --gold: #ffd700;
-            --bg: #000;
-            --text: #fff;
-            --text-light: rgba(255,255,255,0.88);
-        }
-
-        @media (prefers-color-scheme: light) {
-            :root {
-                --bg: #0a0a0a;
-                --text: #f0f0f0;
-            }
-        }
-
-        html, body {
-            height: 100%;
-            min-height: -webkit-fill-available;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Manrope', system-ui, sans-serif;
-            overflow-x: hidden;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            background-attachment: fixed;
-        }
-
-        .bg-fixed {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            background: url('https://files.catbox.moe/54nu8y.jpg') center/cover no-repeat fixed;
-            opacity: 0.55;
-            filter: brightness(0.8) contrast(1.1);
-        }
-
-        .overlay {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.92) 65%, #000 100%);
-        }
-
-        .app-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 1.5rem;
-            padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
-            max-width: 520px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.8rem;
-            padding-top: env(safe-area-inset-top);
-        }
-
-        .online-badge {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            font-size: 0.875rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .dot {
-            width: 9px;
-            height: 9px;
-            background: var(--green);
-            border-radius: 50%;
-            box-shadow: 0 0 12px var(--green);
-            animation: pulse-dot 2.2s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50%      { opacity: 0.5; transform: scale(1.15); }
-        }
-
-        .privacy {
-            font-size: 0.75rem;
-            font-weight: 700;
-            opacity: 0.7;
-            letter-spacing: 1.2px;
-        }
-
-        .geo-text {
-            color: var(--green);
-            font-weight: 800;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            text-shadow: 0 0 12px rgba(0,255,157,0.4);
-        }
-
-        h1 {
-            font-family: 'Bebas Neue', Impact, sans-serif;
-            font-size: clamp(3.2rem, 12vw, 4.8rem);
-            line-height: 0.92;
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-
-        .adult-icon {
-            width: 48px;
-            height: 48px;
-            margin-left: 0.4rem;
-            vertical-align: middle;
-        }
-
-        .desc {
-            font-size: 1.05rem;
-            line-height: 1.48;
-            color: var(--text-light);
-            margin-bottom: 1.6rem;
-            font-weight: 500;
-        }
-
-        .desc b {
-            color: var(--text);
-            font-weight: 800;
-        }
-
-        .teasers-scroll {
-            display: flex;
-            gap: 0.8rem;
-            overflow-x: auto;
-            padding-bottom: 0.6rem;
-            scrollbar-width: none;
-        }
-
-        .teasers-scroll::-webkit-scrollbar { display: none; }
-
-        .teaser {
-            flex: 0 0 78px;
-            aspect-ratio: 1 / 1;
-            border-radius: 16px;
-            background: #111;
-            border: 1px solid rgba(255,255,255,0.1);
-            overflow: hidden;
-            position: relative;
-            isolation: isolate;
-        }
-
-        .teaser img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(5px) brightness(0.85);
-            opacity: 0.9;
-            transition: filter 0.4s ease;
-        }
-
-        .teaser:hover img { filter: blur(2px) brightness(1); }
-
-        .lock-icon {
-            position: absolute;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            font-size: 2.2rem;
-            color: rgba(255,255,255,0.7);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .btn {
-            width: 100%;
-            height: 62px;
-            border-radius: 18px;
-            font-weight: 800;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.18s ease;
-        }
-
-        .btn:active { transform: scale(0.98); }
-
-        .btn svg { width: 26px; height: 26px; fill: currentColor; }
-
-        .btn-main {
-            background: linear-gradient(135deg, var(--purple), var(--pink));
-            box-shadow: 0 6px 28px rgba(192,38,240,0.35);
-            border: 1px solid rgba(255,255,255,0.18);
-            animation: glow 3s infinite alternate;
-        }
-
-        @keyframes glow {
-            0%   { box-shadow: 0 6px 28px rgba(192,38,240,0.35); }
-            100% { box-shadow: 0 8px 40px rgba(255,0,110,0.5); }
-        }
-
-        .btn-green {
-            background: rgba(0,255,157,0.12);
-            border: 1px solid rgba(0,255,157,0.28);
-            color: var(--green);
-            height: 56px;
-            font-size: 1rem;
-        }
-
-        .btn-gold {
-            background: rgba(255,215,0,0.12);
-            border: 1px solid rgba(255,215,0,0.28);
-            color: var(--gold);
-            height: 56px;
-            font-size: 1rem;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .btn-main { animation: none; }
-            .dot { animation: none; }
-        }
-
-        @media (max-width: 380px) {
-            h1 { font-size: clamp(2.8rem, 10vw, 3.8rem); }
-            .teaser { flex: 0 0 68px; }
-            .btn { height: 56px; font-size: 1rem; }
-        }
+        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+        :root{--purple:#c026f0;--pink:#ff006e;--green:#00ff9d;--gold:#ffd700;--bg:#000;--text:#fff;--text-light:hsla(0,0%,100%,.88)}
+        @media (prefers-color-scheme:light){:root{--bg:#0a0a0a;--text:#f0f0f0}}
+        html,body{height:100%;min-height:-webkit-fill-available;background:var(--bg);color:var(--text);font-family:'Manrope',system-ui,sans-serif;overflow-x:hidden}
+        body{display:flex;flex-direction:column}
+        .bg-fixed{position:fixed;inset:0;z-index:-2;background:url('https://i.postimg.cc/fyFS6Dt1/hf-20260201-130322-a7669d20-d5d8-478b-9cf7-8032068a0c40.png') center/cover no-repeat fixed;opacity:.58;filter:brightness(.82) contrast(1.12)}
+        .overlay{position:fixed;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(0,0,0,.45) 0%,rgba(0,0,0,.94) 62%,#000 100%)}
+        .container{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem;padding-bottom:max(1.6rem,env(safe-area-inset-bottom));max-width:540px;margin:0 auto;width:100%}
+        .top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-top:env(safe-area-inset-top)}
+        .online{background:hsla(0,0%,100%,.09);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid hsla(0,0%,100%,.14);padding:.55rem 1.1rem;border-radius:999px;font-size:.9rem;font-weight:800;display:flex;align-items:center;gap:.6rem}
+        .dot{width:10px;height:10px;background:var(--green);border-radius:50%;box-shadow:0 0 14px var(--green);animation:pulse 2.4s infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.2)}}
+        .privacy{font-size:.8rem;font-weight:700;opacity:.75;letter-spacing:1.3px}
+        .geo{color:var(--green);font-weight:800;font-size:.95rem;text-transform:uppercase;letter-spacing:1.6px;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;text-shadow:0 0 14px hsla(165,100%,50%,.45)}
+        h1{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(3.5rem,13vw,5.2rem);line-height:.9;margin-bottom:.9rem;text-transform:uppercase;letter-spacing:-1.5px}
+        .desc{font-size:1.1rem;line-height:1.5;color:var(--text-light);margin:1rem 0 1.8rem;font-weight:500}
+        .desc b{color:var(--text);font-weight:800}
+        .teasers{display:flex;gap:1rem;overflow-x:auto;padding-bottom:.8rem;scrollbar-width:none}
+        .teasers::-webkit-scrollbar{display:none}
+        .teaser{flex:0 0 86px;aspect-ratio:1;border-radius:18px;background:#111;border:1px solid hsla(0,0%,100%,.12);overflow:hidden;position:relative;transition:transform .25s}
+        .teaser:hover{transform:scale(1.08)}
+        .teaser img{width:100%;height:100%;object-fit:cover;filter:blur(6px) brightness(.8);opacity:.92;transition:all .4s}
+        .teaser:hover img{filter:blur(1.5px) brightness(1.05);transform:scale(1.12)}
+        .lock{position:absolute;inset:0;display:grid;place-items:center;font-size:2.4rem;color:hsla(0,0%,100%,.75);z-index:1;pointer-events:none}
+        .cta-area{display:flex;flex-direction:column;gap:1.2rem}
+        .btn{display:flex;align-items:center;justify-content:center;width:100%;height:68px;border-radius:20px;font-weight:800;font-size:1.15rem;text-transform:uppercase;color:#fff;text-decoration:none;position:relative;overflow:hidden;transition:all .2s}
+        .btn:active{transform:scale(.97)}
+        .btn svg{width:28px;height:28px;fill:currentColor;margin-right:.6rem}
+        .main-cta{background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 8px 32px rgba(192,38,240,.45);border:1px solid hsla(0,0%,100%,.2);animation:glow 3.2s infinite alternate}
+        @keyframes glow{0%{box-shadow:0 8px 32px rgba(192,38,240,.45)}100%{box-shadow:0 12px 48px rgba(255,0,110,.65)}}
+        .main-cta::after{content:'';position:absolute;inset:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent 40%,hsla(0,0%,100%,.25) 50%,transparent 60%);animation:shine 4s infinite}
+        @keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
+        .sec-btn{height:58px;font-size:1.05rem}
+        .green{background:hsla(165,100%,50%,.14);border:1px solid hsla(165,100%,50%,.32);color:var(--green)}
+        .gold{background:hsla(51,100%,50%,.14);border:1px solid hsla(51,100%,50%,.32);color:var(--gold)}
+        .timer-box{background:hsla(0,0%,10%,.7);backdrop-filter:blur(10px);border:1px solid hsla(0,0%,100%,.15);border-radius:16px;padding:1rem;margin:1.2rem 0;text-align:center;font-weight:800;font-size:1.3rem;color:#ff3b5c;text-shadow:0 0 12px #ff3b5c80}
+        .timer-box small{font-size:.85rem;opacity:.9;display:block;margin-top:.4rem}
+        @media (prefers-reduced-motion:reduce){.main-cta,.dot{animation:none}}
+        @media (max-width:400px){h1{font-size:clamp(3rem,11vw,4.2rem)}.teaser{flex:0 0 74px}.btn{height:62px;font-size:1.05rem}}
     </style>
 </head>
 <body>
 
-    <div class="bg-fixed"></div>
-    <div class="overlay"></div>
+<div class="bg-fixed"></div>
+<div class="overlay"></div>
 
-    <div class="app-container">
-        
-        <div class="top-header">
-            <div class="online-badge">
-                <div class="dot"></div>
-                <span id="counter">89</span> онлайн
-            </div>
-            <div class="privacy">PRIVACY: ON</div>
+<div class="container">
+
+    <div class="top-bar">
+        <div class="online">
+            <div class="dot"></div>
+            <span id="online">92</span> смотрят сейчас
+        </div>
+        <div class="privacy">PRIVACY: ON</div>
+    </div>
+
+    <div class="main-content">
+        <div class="geo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            ТЫ РЯДОМ СО МНОЙ?
         </div>
 
-        <div class="main-content">
-            <div class="geo-text">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                ТЫ РЯДОМ СО МНОЙ?
-            </div>
-            
-            <h1>
-                ВХОД ТОЛЬКО<br>ДЛЯ СВОИХ
-                <svg class="adult-icon" viewBox="0 0 50 50" aria-hidden="true">
-                    <circle cx="25" cy="25" r="23" stroke="#ff006e" stroke-width="4" fill="none"/>
-                    <text x="50%" y="50%" text-anchor="middle" dy=".35em" font-family="Arial" font-weight="bold" font-size="22" fill="#ff006e">18+</text>
-                    <line x1="10" y1="40" x2="40" y2="10" stroke="#ff006e" stroke-width="4"/>
-                </svg>
-            </h1>
-            
-            <p class="desc">
-                Весь архив <b>без цензуры</b> здесь.<br>
-                <b>Бесплатно первым 100</b>.
-            </p>
+        <h1>ВХОД ТОЛЬКО ДЛЯ СВОИХ <svg class="adult-icon" viewBox="0 0 50 50" aria-hidden="true"><circle cx="25" cy="25" r="23" stroke="#ff006e" stroke-width="4" fill="none"/><text x="50%" y="50%" text-anchor="middle" dy=".35em" font-family="Arial" font-weight="bold" font-size="22" fill="#ff006e">18+</text><line x1="10" y1="40" x2="40" y2="10" stroke="#ff006e" stroke-width="4"/></svg></h1>
 
-            <div class="teasers-scroll">
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/qnrlwa.jpg" alt="" loading="lazy"></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/yl82ho.jpg" alt="" loading="lazy"></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/fmr6xx.jpg" alt="" loading="lazy"></div>
-                <div class="teaser"><span class="lock-icon">🔒</span><img src="https://files.catbox.moe/qilktg.jpg" alt="" loading="lazy"></div>
-            </div>
+        <p class="desc">Всё без цензуры уже здесь.<br><b>Осталось 4 места бесплатно</b>.</p>
+
+        <div id="timer-box" class="timer-box">
+            <div id="countdown">Осталось: 04:59</div>
+            <small>Время действия акции</small>
         </div>
 
-        <div class="buttons-area" style="display:flex; flex-direction:column; gap:1rem;">
-            <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn btn-main">
-                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                ВРЫВАЙСЯ В ПРИВАТ 🔥
-            </a>
-
-            <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn btn-green" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                ПОДДЕРЖАТЬ МЕНЯ 💖
-            </a>
-
-            <a href="https://t.me/lucky_bear_wins" class="btn btn-gold" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h2v2H7v-2zm8 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm0-8h2v2h-2v-2z"/></svg>
-                КРУТИ И ЗАБИРАЙ 🎰
-            </a>
+        <div class="teasers">
+            <div class="teaser"><span class="lock">🔒</span><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" loading="lazy" alt=""></div>
+            <div class="teaser"><span class="lock">🔒</span><img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" loading="lazy" alt=""></div>
+            <div class="teaser"><span class="lock">🔒</span><img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" loading="lazy" alt=""></div>
+            <div class="teaser"><span class="lock">🔒</span><img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" loading="lazy" alt=""></div>
         </div>
     </div>
 
-    <script>
-        // Более плавный и реалистичный счётчик
-        const counter = document.getElementById('counter');
-        let count = 89;
-        let direction = 1;
+    <div class="cta-area">
+        <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn main-cta">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            ВРЫВАЙСЯ В ПРИВАТ 🔥
+        </a>
 
-        function updateCounter() {
-            const change = Math.floor(Math.random() * 3) - 1; // -1, 0, +1
-            count += change * direction;
-            
-            // Держим в разумных пределах
-            if (count < 78) { count = 78; direction = 1; }
-            if (count > 108) { count = 108; direction = -1; }
-            
-            counter.textContent = count;
-        }
+        <a href="https://t.me/lucky_bear_wins" class="btn sec-btn gold" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h2v2H7v-2zm8 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm0-8h2v2h-2v-2z"/></svg>
+            КРУТИ И ЗАБИРАЙ 🎰
+        </a>
 
-        const interval = setInterval(updateCounter, 4500 + Math.random() * 3000);
+        <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn sec-btn green" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            ПОДДЕРЖАТЬ 💖
+        </a>
+    </div>
+</div>
 
-        // Очистка при уходе со страницы (опционально)
-        window.addEventListener('beforeunload', () => clearInterval(interval));
-    </script>
+<script>
+// Online counter (реалистичнее)
+const onlineEl = document.getElementById('online');
+let online = 92;
+setInterval(() => {
+    online += Math.floor(Math.random() * 5) - 2;
+    online = Math.max(78, Math.min(118, online));
+    onlineEl.textContent = online;
+}, 3800 + Math.random() * 4000);
+
+// Countdown timer (5 минут от загрузки — сильный urgency)
+const timerEl = document.getElementById('countdown');
+let timeLeft = 5 * 60; // 5 минут в секундах
+
+function updateTimer() {
+    if (timeLeft <= 0) {
+        timerEl.textContent = "Акция закончилась!";
+        timerEl.style.color = "#888";
+        return;
+    }
+    const min = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+    const sec = String(timeLeft % 60).padStart(2, '0');
+    timerEl.textContent = `Осталось: \( {min}: \){sec}`;
+    timeLeft--;
+}
+
+updateTimer();
+const timerInterval = setInterval(updateTimer, 1000);
+</script>
 </body>
         </html>
