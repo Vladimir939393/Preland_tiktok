@@ -1,468 +1,351 @@
 <!DOCTYPE html>
-<html lang="ru" class="dark">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="theme-color" content="#000"/>
-  <meta name="description" content="Мои самые откровенные фотки и видео ждут тебя 🔥 заходи скорее"/>
-  <meta name="robots" content="noindex, nofollow"/>
-  <title>Заходи скорее, пока я горячая 😈</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Приватный доступ | Limited Access</title>
+    <meta name="description" content="Exclusive private community. 18+ access only.">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- PRELOAD ASSETS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- PWA manifest -->
-  <link rel="manifest" href="data:application/manifest+json,{
-    'name': 'Мой Приват 😏',
-    'short_name': 'Приват',
-    'start_url': '.',
-    'display': 'standalone',
-    'background_color': '#000',
-    'theme_color': '#ff3366',
-    'icons': [{'src': 'https://your-icon-192.png', 'sizes': '192x192', 'type': 'image/png'}]
-  }"/>
+    <style>
+        /* --- 2026 CORE STYLES --- */
+        :root {
+            --neon-green: #00FF41;
+            --cyber-purple: #BC13FE;
+            --toxic-pink: #FF0055;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --bg: #050505;
+        }
 
-  <style>
-    :root {
-      --bg: #000;
-      --text: #fff;
-      --glass: rgba(30,30,40,0.92);
-      --tg-pink: #ff3366;
-      --tg-purple: #aa00ff;
-      --donate-green: #00ff9d;
-      --casino-gold: #ffd700;
-      --shadow: 0 20px 90px rgba(0,0,0,0.98);
-      --transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background: var(--bg);
+            color: white;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      overscroll-behavior: none;
-      touch-action: manipulation;
-    }
+        /* --- BACKGROUND FX --- */
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1964&auto=format&fit=crop') center/cover no-repeat;
+            opacity: 0.6;
+            filter: brightness(0.6) contrast(1.2) saturate(1.2);
+            animation: kenBurns 20s ease-in-out infinite alternate;
+        }
+        
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.95) 90%);
+            backdrop-filter: blur(2px);
+        }
 
-    #bg-image {
-      position: fixed;
-      inset: 0;
-      background: url('https://your-3x4-model-photo.jpg') center/cover no-repeat;
-      background-attachment: fixed;
-      opacity: 0.62;
-      z-index: -2;
-      filter: brightness(0.58) contrast(1.35) saturate(1.45);
-      transform: scale(1.12);
-      transition: transform 0.9s ease-out;
-      will-change: transform;
-    }
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
 
-    body.scrolled #bg-image {
-      transform: scale(1.28);
-    }
+        /* --- UI COMPONENTS --- */
+        .container {
+            padding: 24px;
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 100dvh; /* Dynamic Viewport Height */
+            padding-bottom: 100px;
+        }
 
-    #particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-    }
+        .status-bar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
 
-    .hero {
-      height: 100vh;
-      min-height: 840px;
-      aspect-ratio: 3/4;
-      max-width: 100vw;
-      margin: 0 auto;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      padding: 0 28px 160px;
-      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 65%);
-    }
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0,0,0,0.6);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
 
-    .content {
-      max-width: 620px;
-      width: 100%;
-      padding-bottom: 48px;
-    }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-green);
+            animation: pulse 1.5s infinite;
+        }
 
-    h1 {
-      font-size: clamp(60px, 17vw, 110px);
-      font-weight: 900;
-      line-height: 0.98;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #ff3366, #aa00ff, #00d4ff, #ffd700);
-      background-size: 450% 450%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientFlow 12s ease infinite;
-      text-shadow: 0 10px 40px rgba(0,0,0,0.9);
-    }
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(48px, 15vw, 64px);
+            line-height: 0.9;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
 
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        .geo-text {
+            color: var(--neon-green);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+            text-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
 
-    p.subtitle {
-      font-size: clamp(26px, 8.5vw, 42px);
-      font-weight: 800;
-      opacity: 0.98;
-      margin-bottom: 28px;
-      line-height: 1.3;
-      text-shadow: 0 6px 24px rgba(0,0,0,0.8);
-    }
+        .subtitle {
+            font-size: 18px;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 30px;
+        }
 
-    .social-proof {
-      font-size: 24px;
-      font-weight: 800;
-      color: #ffd700;
-      opacity: 1;
-      margin-bottom: 36px;
-      animation: pulseText 2.8s infinite;
-      text-shadow: 0 4px 16px rgba(255,215,0,0.6);
-    }
+        /* --- PROOF & CONTENT TEASERS --- */
+        .teasers {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .teaser-item {
+            min-width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .teaser-item img { width: 100%; height: 100%; object-fit: cover; filter: blur(4px); }
+        .lock-icon { position: absolute; font-size: 20px; z-index: 2; }
 
-    @keyframes pulseText {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.05); }
-    }
+        /* --- CONVERSION BUTTONS --- */
+        .cta-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, #000 20%, transparent);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
 
-    .timer {
-      font-size: 24px;
-      color: #ff3366;
-      font-weight: 900;
-      margin-bottom: 48px;
-      letter-spacing: 2px;
-      text-shadow: 0 6px 24px rgba(255,51,102,0.7);
-    }
+        .btn {
+            width: 100%;
+            max-width: 480px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            text-decoration: none;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.1s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-    .buttons {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--glass);
-      backdrop-filter: blur(36px);
-      padding: 32px 36px 48px;
-      border-top: 1px solid rgba(255,255,255,0.22);
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      z-index: 999;
-      box-shadow: 0 -28px 90px rgba(0,0,0,1);
-    }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyber-purple), var(--toxic-pink));
+            box-shadow: 0 0 40px rgba(188, 19, 254, 0.4);
+            animation: glowPulse 3s infinite;
+        }
 
-    .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      width: 100%;
-      padding: 32px;
-      font-size: 25px;
-      font-weight: 900;
-      text-align: center;
-      text-decoration: none;
-      color: white;
-      border-radius: 44px;
-      transition: var(--transition);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
 
-    .btn svg {
-      width: 40px;
-      height: 40px;
-      fill: currentColor;
-    }
+        .btn:active { transform: scale(0.96); }
 
-    .btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-      transform: translateX(-250%);
-      transition: transform 1.3s;
-    }
+        .trust-badge {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-    .btn:hover::before, .btn:active::before {
-      transform: translateX(250%);
-    }
+        /* --- ANIMATIONS --- */
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        @keyframes glowPulse { 0% { box-shadow: 0 0 20px rgba(188, 19, 254, 0.4); } 50% { box-shadow: 0 0 40px rgba(255, 0, 85, 0.6); } 100% { box-shadow: 0 0 20px rgba(188, 19, 254, 0.4); } }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 100%; } 100% { left: 100%; } }
+        @keyframes textGlitch { 0% { transform: skew(0deg); } 20% { transform: skew(-2deg); } 40% { transform: skew(2deg); } 100% { transform: skew(0deg); } }
 
-    .btn-primary   { background: linear-gradient(135deg, var(--tg-pink), var(--tg-purple)); }
-    .btn-secondary { background: linear-gradient(135deg, var(--donate-green), #00cc88); }
-    .btn-tertiary  { background: linear-gradient(135deg, var(--casino-gold), #ff6b00); }
+        /* Loader */
+        #loader { position: fixed; inset:0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s;}
+        .spinner { width: 40px; height: 40px; border: 4px solid #333; border-top: 4px solid var(--neon-green); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    .btn:hover {
-      transform: translateY(-16px) scale(1.1);
-      box-shadow: 0 60px 140px rgba(0,0,0,1);
-    }
-
-    .btn:active {
-      transform: translateY(-7px) scale(0.93);
-    }
-
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.65);
-      transform: scale(0);
-      animation: rippleAnim 1.1s linear;
-      pointer-events: none;
-    }
-
-    @keyframes rippleAnim {
-      to { transform: scale(12); opacity: 0; }
-    }
-
-    .lang-switch {
-      text-align: center;
-      padding: 40px 0 24px;
-      font-size: 19px;
-      opacity: 0.88;
-      z-index: 100;
-    }
-
-    .lang-switch a {
-      color: #ddd;
-      margin: 0 20px;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .lang-switch a:hover, .lang-switch a.active {
-      color: white;
-      font-weight: 900;
-    }
-
-    @media (min-width: 768px) {
-      .hero { aspect-ratio: auto; height: auto; min-height: 100vh; padding: 100px 60px; }
-      .buttons {
-        position: static;
-        flex-direction: row;
-        justify-content: center;
-        gap: 56px;
-        padding: 140px 100px;
-        background: transparent;
-        backdrop-filter: none;
-        border-top: none;
-        box-shadow: none;
-      }
-      .btn { max-width: 520px; }
-    }
-  </style>
+    </style>
 </head>
 <body>
 
-  <div id="bg-image"></div>
-  <div id="particles"></div>
+    <!-- LOADER -->
+    <div id="loader"><div class="spinner"></div></div>
 
-  <div class="hero">
-    <div class="content">
-      <h1 id="title">Заходи скорее, пока я горячая 😈</h1>
-      <p class="subtitle" id="subtitle">Мои откровенные фотки и видео ждут тебя 🔥 уже 48k внутри</p>
-      <div class="social-proof" id="proof">Ты следующий? 👀</div>
-      <div class="timer" id="timer">Канал закроют через: <span id="countdown">24:00:00</span></div>
+    <div class="bg-layer" id="bgLayer"></div>
+    <div class="overlay"></div>
+
+    <div class="status-bar">
+        <div class="live-badge">
+            <div class="dot"></div>
+            <span id="viewerCount">24,892</span> online
+        </div>
+        <div class="lang">EN / RU</div>
     </div>
-  </div>
 
-  <div class="buttons">
-    <a id="btn1" href="https://t.me/yourprivatechannel" target="_blank" class="btn btn-primary">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.36 14.36l-3.5-3.5-1.5 1.5 3.5 3.5c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41zM9 16l-1-1 3-3-3-3 1-1 3 3 3-3 1 1-3 3 3 3-1 1-3-3-3 3z"/></svg>
-      Врывайся ко мне в приват 😏
-    </a>
-    <a id="btn2" href="https://your-donate-link.com" target="_blank" class="btn btn-secondary">
-      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      Поддержи и увидишь ВСЁ 💦
-    </a>
-    <a id="btn3" href="https://casino-link.com/?ref=yourid" target="_blank" class="btn btn-tertiary">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15h4v-2h-4v2zm0-4h4V7h-4v6z"/></svg>
-      Крути и забирай бабки 🎰
-    </a>
-  </div>
+    <div class="container">
+        <!-- PUSH-PULL COPYWRITING -->
+        <span class="geo-text" id="geoLoc">📍 ИЩУ ПАРНЯ ИЗ...</span>
+        
+        <h1 id="mainTitle">Вход только<br>для своих</h1>
+        
+        <p class="subtitle">
+            Я устала от банов в TikTok. Весь архив без цензуры (180+ фото) я залила сюда. 
+            <br><b style="color:white">Бесплатно для первых 100 подписчиков.</b>
+        </p>
 
-  <div class="lang-switch">
-    <a href="#" data-lang="en" class="active">EN</a>
-    <a href="#" data-lang="ru">RU</a>
-    <a href="#" data-lang="fi">FI</a>
-    <a href="#" data-lang="de">DE</a>
-  </div>
+        <!-- SOCIAL PROOF / TEASERS -->
+        <div class="teasers">
+            <div class="teaser-item"><span class="lock-icon">🔒</span><img src="https://via.placeholder.com/150/222/fff?text=Hidden" alt=""></div>
+            <div class="teaser-item"><span class="lock-icon">🔒</span><img src="https://via.placeholder.com/150/333/fff?text=Hidden" alt=""></div>
+            <div class="teaser-item"><span class="lock-icon">🔒</span><img src="https://via.placeholder.com/150/444/fff?text=Hidden" alt=""></div>
+        </div>
 
-  <script>
-    const translations = {
-      en: {
-        title: "Hurry up while I'm hot 😈",
-        subtitle: "My naughtiest pics & vids waiting for you 🔥 already 48k inside",
-        btn1: "Dive into my private 😏",
-        btn2: "Support & see EVERYTHING 💦",
-        btn3: "Spin & grab the cash 🎰",
-        proof: "You next? 👀",
-        timer: "Channel closes in: "
-      },
-      ru: {
-        title: "Заходи скорее, пока я горячая 😈",
-        subtitle: "Мои откровенные фотки и видео ждут тебя 🔥 уже 48k внутри",
-        btn1: "Врывайся ко мне в приват 😏",
-        btn2: "Поддержи и увидишь ВСЁ 💦",
-        btn3: "Крути и забирай бабки 🎰",
-        proof: "Ты следующий? 👀",
-        timer: "Канал закроют через: "
-      },
-      fi: {
-        title: "Tule nopeasti, kun oon kuuma 😈",
-        subtitle: "Mun likaisimmat kuvat & videot odottaa sua 🔥 jo 48k sisällä",
-        btn1: "Sukella mun yksityiseen 😏",
-        btn2: "Tue mua ja näe KAIKKI 💦",
-        btn3: "Pyöritä ja nappaa rahat 🎰",
-        proof: "Oletko seuraava? 👀",
-        timer: "Kanava sulkeutuu: "
-      },
-      de: {
-        title: "Beeil dich, solange ich heiß bin 😈",
-        subtitle: "Meine versautesten Pics & Vids warten 🔥 schon 48k drin",
-        btn1: "Tauch in mein Privates 😏",
-        btn2: "Unterstütz & sieh ALLES 💦",
-        btn3: "Dreh & schnapp dir Kohle 🎰",
-        proof: "Du als Nächster? 👀",
-        timer: "Kanal schließt in: "
-      }
-    };
+    </div>
 
-    function setLanguage(lang) {
-      if (!translations[lang]) lang = 'ru';
-      document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
-      document.getElementById('title').textContent = translations[lang].title;
-      document.getElementById('subtitle').textContent = translations[lang].subtitle;
-      document.getElementById('btn1').lastChild.textContent = translations[lang].btn1;
-      document.getElementById('btn2').lastChild.textContent = translations[lang].btn2;
-      document.getElementById('btn3').lastChild.textContent = translations[lang].btn3;
-      document.getElementById('proof').textContent = translations[lang].proof;
-      document.getElementById('timer').textContent = translations[lang].timer;
-    }
+    <!-- STICKY CTA -->
+    <div class="cta-container">
+        <a href="https://t.me/YOUR_LINK_HERE" class="btn btn-primary" id="mainBtn" onclick="haptic()">
+            Открыть доступ 🔥
+        </a>
+        <div class="trust-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#00FF41"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Проверено: Без спама
+        </div>
+    </div>
 
-    const userLang = (navigator.language || navigator.userLanguage || 'ru').split('-')[0].toLowerCase();
-    setLanguage(userLang);
+    <script>
+        // --- 1. CONFIGURATION ---
+        const CONFIG = {
+            link: "https://t.me/YOUR_MAIN_LINK",
+            geoFallback: "ТВОЕГО ГОРОДА",
+            vibration: true
+        };
 
-    document.querySelectorAll('[data-lang]').forEach(el => {
-      el.addEventListener('click', e => {
-        e.preventDefault();
-        setLanguage(el.dataset.lang);
-      });
-    });
+        // --- 2. LOADER & INIT ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.remove(), 500);
+            initGeo();
+            initCounter();
+        });
 
-    // Parallax + scroll glow
-    window.addEventListener('scroll', () => {
-      document.body.classList.toggle('scrolled', window.scrollY > 80);
-    });
-
-    // Particles (более насыщенные цвета)
-    function createParticles() {
-      const container = document.getElementById('particles');
-      for (let i = 0; i < 80; i++) {
-        const p = document.createElement('div');
-        p.style.position = 'absolute';
-        p.style.width = p.style.height = Math.random() * 8 + 2 + 'px';
-        p.style.background = `hsl(${Math.random()*360}, 100%, 70%)`;
-        p.style.borderRadius = '50%';
-        p.style.left = Math.random() * 100 + '%';
-        p.style.top = Math.random() * 100 + '%';
-        p.style.opacity = Math.random() * 0.8 + 0.2;
-        p.style.animation = `float ${Math.random() * 45 + 25}s linear infinite`;
-        container.appendChild(p);
-      }
-    }
-    createParticles();
-
-    // Ripple + haptic + delay redirect
-    document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('touchstart', function (e) {
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        const rect = btn.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.touches[0].clientX - rect.left - size / 2;
-        const y = e.touches[0].clientY - rect.top - size / 2;
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        btn.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 1100);
-
-        if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
-      });
-
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        setTimeout(() => window.location = btn.href, 450);
-      });
-    });
-
-    // Exit-intent + back trap
-    let showed = false;
-    window.addEventListener('mouseout', e => {
-      if (e.clientY <= 0 && !showed) {
-        showed = true;
-        if (confirm("Подожди! Хочешь попасть в мой приватный канал прямо сейчас? 😘")) {
-          window.location = document.getElementById('btn1').href;
+        // --- 3. GEO-LOCATION HACK (Simulated for speed/stability) ---
+        // В продакшене можно подключить ipapi.co, но для скорости используем
+        // симуляцию или простой JS запрос, который не блокирует рендер.
+        async function initGeo() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                if(data.city) {
+                    document.getElementById('geoLoc').innerText = `📍 ИЩУ ПАРНЯ ИЗ ${data.city.toUpperCase()}`;
+                } else {
+                    throw new Error('No city');
+                }
+            } catch (e) {
+                document.getElementById('geoLoc').innerText = `📍 ТЫ РЯДОМ СО МНОЙ?`;
+            }
         }
-      }
-    });
 
-    window.addEventListener('popstate', e => {
-      if (!showed) {
-        showed = true;
-        if (confirm("Ты куда? 😏 Вот ссылка на мой приватный канал!")) {
-          window.location = document.getElementById('btn1').href;
+        // --- 4. PSYCHO-TRIGGERS (Live Counter) ---
+        function initCounter() {
+            const counter = document.getElementById('viewerCount');
+            let count = 24892;
+            
+            setInterval(() => {
+                const change = Math.floor(Math.random() * 15) - 5; // +10 to -5 variability
+                count += change;
+                counter.innerText = count.toLocaleString('en-US');
+            }, 2500);
         }
-      }
-    });
 
-    // Countdown 24 часа
-    function startTimer() {
-      let timeLeft = 24 * 60 * 60;
-      const countdownEl = document.getElementById('countdown');
-      const timer = setInterval(() => {
-        timeLeft--;
-        const h = Math.floor(timeLeft / 3600).toString().padStart(2, '0');
-        const m = Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0');
-        const s = (timeLeft % 60).toString().padStart(2, '0');
-        countdownEl.textContent = `\( {h}: \){m}:${s}`;
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          countdownEl.textContent = "Канал закрыт 😢";
+        // --- 5. HAPTIC FEEDBACK (iOS/Android) ---
+        function haptic() {
+            if (navigator.vibrate) {
+                navigator.vibrate(50); // Легкая вибрация при клике
+            }
+            // Pixel event firing could go here
+            console.log('Conversion Click'); 
         }
-      }, 1000);
-    }
-    startTimer();
-  </script>
 
-  <style>
-    @keyframes float {
-      0% { transform: translateY(0) translateX(0); opacity: 0.7; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-200vh) translateX(80px); opacity: 0; }
-    }
+        // --- 6. SIMPLE EXIT INTENT (Mobile Back Button Override - Dark Pattern) ---
+        // Осторожно с этим, но это работает. 
+        history.pushState({}, null, null);
+        window.onpopstate = function () {
+            history.pushState({}, null, null);
+            alert("Подожди! Для тебя есть персональный бонус 🎁. Нажми 'Открыть доступ'!");
+        };
 
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.7);
-      transform: scale(0);
-      animation: rippleAnim 1.2s linear;
-      pointer-events: none;
-    }
-
-    @keyframes rippleAnim {
-      to { transform: scale(12); opacity: 0; }
-    }
-  </style>
+    </script>
 </body>
 </html>
