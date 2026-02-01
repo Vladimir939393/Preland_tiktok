@@ -4,300 +4,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Приватный доступ 🔞</title>
-    <meta name="theme-color" content="#000000">
     
-    <!-- ПРЕДЗАГРУЗКА ФОНА (ускоряет загрузку) -->
+    <!-- УСКОРЕННАЯ ЗАГРУЗКА ФОНА -->
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?q=80&w=1964">
 
     <!-- ШРИФТЫ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --purple: #BC13FE;
-            --pink: #FF0055;
-            --green: #00E676;
-            --gold: #FFD700;
-        }
-
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
-        }
+        /* СБРОС СТИЛЕЙ */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
             background: #000;
             color: #fff;
             font-family: 'Manrope', sans-serif;
             height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden; /* Запрет скролла всей страницы */
+            position: relative;
         }
 
-        /* ФОН С АНИМАЦИЕЙ */
+        /* 1. ФОН (Статичный и надежный) */
         .bg {
-            position: fixed;
-            inset: 0;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* ССЫЛКА НА ФОТО */
+            background: url('https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?q=80&w=1964') center center/cover no-repeat;
+            opacity: 0.6;
             z-index: -2;
-            /* 1. ЗАМЕНИ ЭТУ ССЫЛКУ НА СВОЕ ФОТО МОДЕЛИ */
-            background: url('https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?q=80&w=1964') center/cover no-repeat;
-            opacity: 0.65;
-            filter: brightness(0.7) contrast(1.15);
-            animation: zoom 30s ease-in-out infinite alternate;
         }
         
+        /* Затемнение, чтобы текст читался */
         .overlay {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 70%, #000 100%);
-        }
-
-        @keyframes zoom { 
-            0% { transform: scale(1); } 
-            100% { transform: scale(1.12); } 
-        }
-
-        /* ВЕРХНЯЯ ПАНЕЛЬ */
-        .top {
             position: absolute;
-            top: 18px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.95) 85%, #000 100%);
+            z-index: -1;
         }
 
-        .live {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(0,0,0,0.5);
-            padding: 5px 12px;
-            border-radius: 25px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.1);
+        /* 2. ВЕРХНЯЯ ПАНЕЛЬ */
+        .top-bar {
+            position: absolute;
+            top: 20px; left: 20px; right: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 10;
         }
 
-        .dot {
-            width: 7px;
-            height: 7px;
+        .online-badge {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 13px; font-weight: 800;
+        }
+
+        .green-dot {
+            width: 8px; height: 8px;
             background: #00FF41;
             border-radius: 50%;
-            box-shadow: 0 0 10px #00FF41;
-            animation: blink 2s infinite;
+            box-shadow: 0 0 8px #00FF41;
         }
 
-        @keyframes blink { 
-            0%, 100% { opacity: 1; } 
-            50% { opacity: 0.3; } 
+        .privacy-text {
+            font-size: 11px; font-weight: 700; opacity: 0.7; letter-spacing: 1px;
         }
 
-        /* КОНТЕНТ */
-        .content {
+        /* 3. КОНТЕНТ */
+        .content-wrapper {
             position: absolute;
-            bottom: 250px;
-            left: 0;
-            right: 0;
-            padding: 0 24px;
-            max-width: 480px;
-            margin: 0 auto;
+            bottom: 0; left: 0; width: 100%;
+            padding: 0 24px 30px; /* Отступы снизу */
+            display: flex; flex-direction: column;
+            z-index: 20;
         }
 
-        .geo {
-            color: var(--green);
+        /* ГЕО ТЕКСТ (СТАТИЧНЫЙ) */
+        .geo-static {
+            color: #00E676;
             font-weight: 800;
-            font-size: 13px;
-            letter-spacing: 1.2px;
+            font-size: 14px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            display: block;
-            text-shadow: 0 0 12px rgba(0,230,118,0.5);
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px rgba(0,230,118,0.4);
         }
 
+        /* ЗАГОЛОВОК (ИСПРАВИЛ НАЛОЖЕНИЕ) */
         h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(50px, 13vw, 62px);
-            line-height: 0.98;
-            margin-bottom: 14px;
+            font-size: 60px;
+            line-height: 1.1; /* БУКВЫ БОЛЬШЕ НЕ НАЛЕЗАЮТ */
+            margin-bottom: 15px;
             text-transform: uppercase;
-            background: linear-gradient(180deg, #fff 20%, #aaa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
-        }
-
-        .desc {
-            font-size: 15px;
-            line-height: 1.55;
-            color: rgba(255,255,255,0.88);
-            margin-bottom: 22px;
-            font-weight: 500;
-        }
-
-        .desc b {
             color: #fff;
-            font-weight: 800;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        p.desc {
+            font-size: 16px;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 25px;
+            font-weight: 600;
         }
 
         /* ТИЗЕРЫ */
         .teasers {
-            display: flex;
-            gap: 11px;
-            overflow-x: auto;
-            padding-bottom: 8px;
+            display: flex; gap: 10px; margin-bottom: 25px;
         }
-
-        .box {
-            min-width: 72px;
-            height: 72px;
-            border-radius: 13px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
-            position: relative;
-            overflow: hidden;
+        
+        .t-item {
+            width: 70px; height: 70px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
         }
-
-        .box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(6px);
-            opacity: 0.75;
+        
+        .t-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: blur(5px); opacity: 0.8;
         }
+        
+        .lock { position: absolute; font-size: 20px; z-index: 2; }
 
-        .lock {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 22px;
-            z-index: 2;
-            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.9));
-        }
-
-        /* КНОПКИ */
-        .btns {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 22px 20px 32px;
-            background: linear-gradient(to top, #000 40%, transparent);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 11px;
-            align-items: center;
+        /* 4. КНОПКИ (ИСПРАВЛЕНЫ ИКОНКИ) */
+        .btn-group {
+            display: flex; flex-direction: column; gap: 12px;
         }
 
         .btn {
-            width: 100%;
-            max-width: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 11px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            border-radius: 15px;
-            transition: transform 0.12s;
-            font-size: 16px;
-        }
-
-        .btn:active { 
-            transform: scale(0.96); 
-        }
-
-        /* ИКОНКИ (ИСПРАВЛЕНЫ!) */
-        .btn svg {
-            width: 21px;
-            height: 21px;
-            flex-shrink: 0;
-        }
-
-        /* ГЛАВНАЯ КНОПКА */
-        .main {
-            height: 62px;
-            font-size: 18px;
-            background: linear-gradient(135deg, var(--purple), var(--pink));
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: 0 6px 25px rgba(188,19,254,0.35);
-            animation: glow 2.8s infinite;
+            width: 100%; height: 60px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: white;
+            font-weight: 800; font-size: 18px; text-transform: uppercase;
             position: relative;
-            overflow: hidden;
         }
 
-        .main::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
-            animation: shine 4s infinite;
+        .btn:active { transform: scale(0.98); }
+
+        /* ИКОНКИ ВНУТРИ КНОПОК */
+        .icon-svg {
+            width: 24px; height: 24px;
+            margin-right: 12px; /* Отступ от текста */
+            fill: #ffffff; /* ЖЕЛЕЗНО БЕЛЫЙ ЦВЕТ */
         }
 
-        @keyframes glow { 
-            0%, 100% { box-shadow: 0 0 15px rgba(188,19,254,0.25); } 
-            50% { box-shadow: 0 0 35px rgba(255,0,85,0.55); } 
+        /* СТИЛИ КНОПОК */
+        .btn-main {
+            background: linear-gradient(135deg, #BC13FE, #FF0055);
+            box-shadow: 0 0 20px rgba(188,19,254,0.4);
+            border: 1px solid rgba(255,255,255,0.3);
+            animation: pulse 2s infinite;
         }
 
-        @keyframes shine { 
-            0% { transform: translateX(-100%) rotate(45deg); } 
-            100% { transform: translateX(100%) rotate(45deg); } 
+        .btn-green {
+            background: rgba(0, 230, 118, 0.15);
+            border: 1px solid rgba(0, 230, 118, 0.4);
+            color: #00E676;
+            font-size: 16px; height: 54px;
         }
+        .btn-green .icon-svg { fill: #00E676; }
 
-        /* ВТОРИЧНЫЕ КНОПКИ */
-        .donate {
-            height: 54px;
-            font-size: 15px;
-            background: rgba(0,230,118,0.12);
-            border: 1px solid rgba(0,230,118,0.35);
-            color: var(--green);
-            backdrop-filter: blur(10px);
+        .btn-gold {
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            color: #FFD700;
+            font-size: 16px; height: 54px;
         }
+        .btn-gold .icon-svg { fill: #FFD700; }
 
-        .casino {
-            height: 54px;
-            font-size: 15px;
-            background: rgba(255,215,0,0.12);
-            border: 1px solid rgba(255,215,0,0.35);
-            color: var(--gold);
-            backdrop-filter: blur(10px);
-        }
+        @keyframes pulse { 0% { box-shadow: 0 0 15px rgba(188,19,254,0.3); } 50% { box-shadow: 0 0 30px rgba(255,0,85,0.6); } 100% { box-shadow: 0 0 15px rgba(188,19,254,0.3); } }
     </style>
 </head>
 <body>
 
-    <!-- ФОН -->
     <div class="bg"></div>
     <div class="overlay"></div>
 
-    <!-- ВЕРХНЯЯ СТРОКА -->
-    <div class="top">
-        <div class="live">
-            <div class="dot"></div>
-            <span id="counter">48,286</span>
+    <!-- ВЕРХ -->
+    <div class="top-bar">
+        <div class="online-badge">
+            <div class="green-dot"></div>
+            <span id="counter">48,291</span>
         </div>
-        <div style="opacity: 0.65; font-size: 10px;">PRIVACY: ON</div>
+        <div class="privacy-text">PRIVACY: ON</div>
     </div>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
-    <div class="content">
-        <span class="geo" id="geo">📍 ТЫ РЯДОМ СО МНОЙ?</span>
+    <!-- КОНТЕНТ -->
+    <div class="content-wrapper">
         
+        <!-- ГЕО: ПРОСТО ТЕКСТ, НИКАКОГО API -->
+        <div class="geo-static">📍 ТЫ РЯДОМ СО МНОЙ?</div>
+
         <h1>Вход только<br>для своих 🔞</h1>
         
         <p class="desc">
@@ -305,95 +209,49 @@
             <br><b>Бесплатно для первых 100 человек.</b>
         </p>
 
-        <!-- 2. ЗАМЕНИ ССЫЛКИ НА СВОИ ФОТО (код сам их заблюрит) -->
+        <!-- ТИЗЕРЫ (Замени ссылки на свои фото) -->
         <div class="teasers">
-            <div class="box">
-                <span class="lock">🔒</span>
-                <img src="https://images.unsplash.com/photo-1596451190630-186aff535bf2?w=150" alt="">
-            </div>
-            <div class="box">
-                <span class="lock">🔒</span>
-                <img src="https://images.unsplash.com/photo-1620553835677-78972e39178f?w=150" alt="">
-            </div>
-            <div class="box">
-                <span class="lock">🔒</span>
-                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150" alt="">
-            </div>
-            <div class="box">
-                <span class="lock">🔒</span>
-                <img src="https://images.unsplash.com/photo-1520183802803-06f731a2059f?w=150" alt="">
-            </div>
+            <div class="t-item"><span class="lock">🔒</span><img src="https://images.unsplash.com/photo-1596451190630-186aff535bf2?w=200"></div>
+            <div class="t-item"><span class="lock">🔒</span><img src="https://images.unsplash.com/photo-1620553835677-78972e39178f?w=200"></div>
+            <div class="t-item"><span class="lock">🔒</span><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200"></div>
+            <div class="t-item"><span class="lock">🔒</span><img src="https://images.unsplash.com/photo-1520183802803-06f731a2059f?w=200"></div>
+        </div>
+
+        <!-- КНОПКИ -->
+        <div class="btn-group">
+            
+            <!-- 1. ПРИВАТ (ГЛАВНАЯ) -->
+            <a href="https://t.me/YOUR_LINK" class="btn btn-main">
+                <!-- SVG САМОЛЕТИК -->
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                ВРЫВАЙСЯ В ПРИВАТ 🔥
+            </a>
+
+            <!-- 2. ПОДДЕРЖКА -->
+            <a href="https://donate.com" class="btn btn-green">
+                <!-- SVG СЕРДЦЕ -->
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                ПОДДЕРЖАТЬ МЕНЯ 💖
+            </a>
+
+            <!-- 3. КАЗИНО -->
+            <a href="https://casino.com" class="btn btn-gold">
+                <!-- SVG ФИШКА -->
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h2v2H7v-2zm8 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm0-8h2v2h-2v-2z"/></svg>
+                КРУТИ И ЗАБИРАЙ 🎰
+            </a>
+
         </div>
     </div>
 
-    <!-- КНОПКИ -->
-    <div class="btns">
-        
-        <!-- 3. ГЛАВНАЯ — ЗАМЕНИ ССЫЛКУ -->
-        <a href="https://t.me/YOUR_CHANNEL" class="btn main" onclick="vibe()">
-            <!-- Telegram самолетик -->
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-            </svg>
-            ВРЫВАЙСЯ В ПРИВАТ 🔥
-        </a>
-
-        <!-- 4. ДОНАТ — ЗАМЕНИ ССЫЛКУ -->
-        <a href="https://your-donate.link" class="btn donate" target="_blank">
-            <!-- Сердечко -->
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-            ПОДДЕРЖАТЬ МЕНЯ 💖
-        </a>
-
-        <!-- 5. КАЗИНО — ЗАМЕНИ ССЫЛКУ -->
-        <a href="https://casino-link.com" class="btn casino" target="_blank">
-            <!-- Фишка казино -->
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h2v2H7v-2zm8 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm0-8h2v2h-2v-2z"/>
-            </svg>
-            КРУТИ И ЗАБИРАЙ 🎰
-        </a>
-
-    </div>
-
     <script>
-        // АВТОЗАПУСК ПРИ ЗАГРУЗКЕ
-        (function() {
-            
-            // 1. СЧЕТЧИК "ОНЛАЙН"
-            const cnt = document.getElementById('counter');
-            let num = 48286;
-            setInterval(() => {
-                num += Math.floor(Math.random() * 10) - 3;
-                cnt.textContent = num.toLocaleString('en-US');
-            }, 3200);
-
-            // 2. ГЕО-ЛОКАЦИЯ (С ЗАЩИТОЙ ОТ ЗАВИСАНИЯ)
-            const ctrl = new AbortController();
-            const timeout = setTimeout(() => ctrl.abort(), 1500);
-            
-            fetch('https://get.geojs.io/v1/ip/geo.json', { signal: ctrl.signal })
-                .then(r => r.json())
-                .then(d => {
-                    clearTimeout(timeout);
-                    if (d.city) {
-                        document.getElementById('geo').textContent = `📍 ТЫ ИЗ Г. ${d.city.toUpperCase()}?`;
-                    }
-                })
-                .catch(() => {
-                    clearTimeout(timeout);
-                    // Если API не ответил — оставляем дефолтный текст
-                });
-
-        })();
-
-        // 3. ВИБРАЦИЯ ПРИ КЛИКЕ (только на Android)
-        function vibe() {
-            if (navigator.vibrate) navigator.vibrate(50);
-        }
+        // ТОЛЬКО СЧЕТЧИК. НИКАКОГО ГЕО. НИКАКИХ ЛОАДЕРОВ.
+        const cnt = document.getElementById('counter');
+        let val = 48291;
+        setInterval(() => {
+            val += Math.floor(Math.random() * 8) - 3;
+            cnt.innerText = val.toLocaleString('en-US');
+        }, 3000);
     </script>
-
 </body>
-    </html>
+</html>   
