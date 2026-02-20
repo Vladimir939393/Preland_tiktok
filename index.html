@@ -3,320 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Private Access | 18+</title>
+    <meta name="theme-color" content="#050505">
+    <title>Svetlana | VIP Access</title>
     
-    <link rel="preload" as="image" href="https://i.postimg.cc/c4X6kPby/d063b8c76a294fe685b189ff9849abab.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background: #000;
-            color: #fff;
-            font-family: 'Manrope', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        /* CSS Аудит 2026: Использование нативных CSS-переменных для быстрой смены темы */
+        :root {
+            --accent: #FF0055;
+            --accent-glow: rgba(255, 0, 85, 0.4);
+            --gold: #FFC107;
+            --dark-glass: rgba(15, 15, 20, 0.65);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #a0a0ab;
         }
 
-        .bg {
+        /* CSS Аудит: Аппаратное ускорение и сброс дефолтов */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        body {
+            background-color: #050505;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            overscroll-behavior-y: none; /* Запрет эффекта "резинки" при свайпе */
+        }
+
+        /* Фон с GPU-ускорением (transform: translateZ(0)) */
+        .bg-video {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
             z-index: -2;
-            background: url('https://i.postimg.cc/c4X6kPby/d063b8c76a294fe685b189ff9849abab.jpg') center/cover no-repeat;
+            filter: blur(12px) brightness(0.35);
+            transform: scale(1.1) translateZ(0);
         }
 
         .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top, rgba(255,0,85,0.08) 0%, rgba(0,0,0,0.85) 60%, #000 100%);
             z-index: -1;
-            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 50%, #000 100%);
         }
 
-        .main {
-            flex: 1;
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            padding: 16px;
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .top {
-            position: absolute;
-            top: 12px;
-            left: 16px;
-            right: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            font-weight: 700;
+            flex-grow: 1;
+            justify-content: center;
+            position: relative;
             z-index: 10;
         }
 
-        .online {
-            background: rgba(0,0,0,0.5);
-            padding: 6px 12px;
+        /* Glassmorphism UI 2.0 */
+        .profile-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--dark-glass);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-light);
+            padding: 12px;
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .dot {
-            width: 6px;
-            height: 6px;
-            background: #00E676;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .avatar-wrap { position: relative; }
+        .avatar {
+            width: 56px; height: 56px;
             border-radius: 50%;
-            box-shadow: 0 0 8px #00E676;
-            animation: blink 2s infinite;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            padding: 2px;
+        }
+        
+        .status-dot {
+            position: absolute;
+            bottom: 2px; right: 2px;
+            width: 12px; height: 12px;
+            background: #00FF66;
+            border: 2px solid #000;
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(0,255,102,0.6);
+            animation: pulse-green 2s infinite;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(0, 255, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
         }
 
-        .content {
-            margin-bottom: 16px;
-        }
-
-        .geo {
-            color: #00E676;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+        .profile-info h2 { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+        .profile-info h2 svg { width: 16px; height: 16px; fill: #00A3FF; }
+        .profile-info p { font-size: 13px; color: var(--accent); font-weight: 700; }
 
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(40px, 12vw, 60px);
-            line-height: 0.9;
-            text-transform: uppercase;
-            margin-bottom: 10px;
+            font-size: clamp(28px, 8vw, 36px);
             font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        h1 span { color: var(--accent); }
+
+        .subtitle {
+            font-size: 15px;
+            color: #d1d1d6;
+            line-height: 1.5;
+            margin-bottom: 24px;
         }
 
-        h1 .accent {
-            color: #FF0055;
+        .spots-container { margin-bottom: 24px; }
+        .spots-text {
+            display: flex; justify-content: space-between;
+            font-size: 13px; font-weight: 800; margin-bottom: 8px;
         }
-
-        .desc {
-            font-size: 16px;
-            line-height: 1.4;
-            margin-bottom: 20px;
+        .spots-text span:last-child { color: var(--accent); transition: transform 0.2s; }
+        .progress-bg {
+            width: 100%; height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px; overflow: hidden;
         }
-
-        .desc b {
-            color: #fff;
-            font-weight: 800;
+        .progress-bar {
+            width: 92%; height: 100%;
+            background: linear-gradient(90deg, var(--accent), #ff00a2);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--accent-glow);
+            transition: width 0.5s ease;
         }
 
         .gallery {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 32px;
         }
-
-        .item {
+        .g-item {
             aspect-ratio: 1;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
             background: #111;
-            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .g-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: blur(8px) brightness(0.6);
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+        .g-item:active img { filter: blur(2px) brightness(0.9); }
+        .lock-icon {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 26px; height: 26px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
+            font-size: 12px;
         }
 
-        .item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(4px);
-            opacity: 0.8;
-        }
-
-        .lock {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .item a {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .btns {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
+        .btn-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
 
         .btn {
+            position: relative;
             width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: none;
-            font-weight: 800;
-            font-size: 16px;
-            text-transform: uppercase;
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: transform 0.1s;
-            font-family: 'Manrope', sans-serif;
+            border-radius: 16px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-decoration: none; font-family: 'Inter', sans-serif;
+            transition: transform 0.1s, filter 0.2s;
+            overflow: hidden;
         }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
+        .btn:active { transform: scale(0.96); filter: brightness(0.9); }
 
         .btn-main {
-            background: linear-gradient(135deg, #FF0055, #FF00CC);
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent) 0%, #B3003B 100%);
+            color: #fff; font-size: 16px; font-weight: 900; text-transform: uppercase;
+            box-shadow: 0 8px 24px var(--accent-glow);
+        }
+        
+        .btn-main::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            animation: btnShine 4s infinite;
+        }
+        @keyframes btnShine { 0% { left: -100%; } 20% { left: 100%; } 100% { left: 100%; } }
+
+        .btn-donate {
+            padding: 14px;
+            background: var(--dark-glass);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            backdrop-filter: blur(12px);
             color: #fff;
-            box-shadow: 0 4px 20px rgba(255,0,85,0.3);
-            animation: pulse 1.5s infinite;
+        }
+        .btn-donate .title { font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+        .btn-donate .title span { color: var(--gold); }
+        .btn-donate .sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
+
+        .btn-bonus {
+            padding: 16px;
+            background: transparent;
+            border: 1px dashed var(--border-light);
+            color: #a0a0ab; font-size: 13px; font-weight: 700;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            5% { transform: scale(1.02); }
-            10% { transform: scale(1); }
-            15% { transform: scale(1.02); }
-            20% { transform: scale(1); }
+        /* Умные тосты 2026 */
+        .toast {
+            position: fixed;
+            bottom: -100px; left: 50%; transform: translateX(-50%);
+            background: rgba(20, 20, 25, 0.98);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-light);
+            padding: 10px 18px;
+            border-radius: 100px;
+            display: flex; align-items: center; gap: 10px;
+            font-size: 13px; font-weight: 600; color: #fff;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            width: max-content;
+            pointer-events: none; /* Чтобы не мешал кликам */
         }
-
-        .btn-sec {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.15);
-            font-size: 14px;
-        }
-
-        .btn-gold {
-            background: linear-gradient(90deg, #FFD700, #FFA500);
-            color: #000;
-            font-weight: 900;
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 42px; }
-            .btn { padding: 14px; font-size: 15px; }
-            .gallery { gap: 6px; }
-            .item { border-radius: 8px; }
-        }
-
-        @media (min-width: 768px) {
-            .main { max-width: 500px; }
-            h1 { font-size: 56px; }
-            .btn { padding: 18px; font-size: 17px; }
-        }
+        .toast.active { transform: translate(-50%, -130px); }
+        .toast-icon { font-size: 16px; }
+        .toast-highlight { color: var(--accent); font-weight: 800; }
+        .toast-gold { color: var(--gold); font-weight: 800; }
     </style>
 </head>
 <body>
 
-<div class="bg"></div>
+<img class="bg-video" src="https://i.postimg.cc/c4X6kPby/d063b8c76a294fe685b189ff9849abab.jpg" alt="bg" loading="lazy">
 <div class="overlay"></div>
 
-<div class="top">
-    <div class="online">
-        <div class="dot"></div>
-        <span id="count">118</span>
-    </div>
-    <div>PRIVACY: ON</div>
-</div>
-
-<div class="main">
-    <div class="content">
-        <div class="geo">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-            Ты рядом со мной?
+<div class="container">
+    <div class="profile-card">
+        <div class="avatar-wrap">
+            <img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" class="avatar" alt="Svetlana">
+            <div class="status-dot"></div>
         </div>
-
-        <h1>Вход только<br>для <span class="accent">своих</span> 18+</h1>
-
-        <p class="desc">
-            Залила сюда весь архив без цензуры.<br>
-            <b>Бесплатно для первых 100 человек.</b>
-        </p>
-
-        <div class="gallery">
-            <div class="item">
-                <a href="https://t.me/+JP-STmmmSH1mZThi">
-                    <img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" alt="1">
-                    <div class="lock">🔒</div>
-                </a>
-            </div>
-            <div class="item">
-                <a href="https://t.me/+JP-STmmmSH1mZThi">
-                    <img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" alt="2">
-                    <div class="lock">🔒</div>
-                </a>
-            </div>
-            <div class="item">
-                <a href="https://t.me/+JP-STmmmSH1mZThi">
-                    <img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" alt="3">
-                    <div class="lock">🔒</div>
-                </a>
-            </div>
-            <div class="item">
-                <a href="https://t.me/+JP-STmmmSH1mZThi">
-                    <img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" alt="4">
-                    <div class="lock">🔒</div>
-                </a>
-            </div>
+        <div class="profile-info">
+            <h2>Svetlana 
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7L6 12.6l1.5-1.5 2.6 2.6 6.4-6.4 1.5 1.5-7.9 7.9z"/></svg>
+            </h2>
+            <p>Записывает видео в приват...</p>
         </div>
     </div>
 
-    <div class="btns">
-        <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn btn-main">
-            ▶ ВРЫВАЙСЯ В ПРИВАТ 🔥
+    <h1>Доступ в<br><span>VIP АРХИВ</span> 18+</h1>
+    <p class="subtitle">Никакой цензуры. То, что я удалила из открытого доступа, уже залито в канал. 🤫</p>
+
+    <div class="spots-container">
+        <div class="spots-text">
+            <span>Осталось мест по ссылке:</span>
+            <span id="spots-count">8 / 100</span>
+        </div>
+        <div class="progress-bg">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <a href="https://t.me/+JP-STmmmSH1mZThi" class="g-item"><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" alt="1" loading="lazy"><div class="lock-icon">🔒</div></a>
+        <a href="https://t.me/+JP-STmmmSH1mZThi" class="g-item"><img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" alt="2" loading="lazy"><div class="lock-icon">🔒</div></a>
+        <a href="https://t.me/+JP-STmmmSH1mZThi" class="g-item"><img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" alt="3" loading="lazy"><div class="lock-icon">🔒</div></a>
+        <a href="https://t.me/+JP-STmmmSH1mZThi" class="g-item"><img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" alt="4" loading="lazy"><div class="lock-icon">🔒</div></a>
+    </div>
+
+    <div class="btn-group">
+        <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn btn-main">ОТКРЫТЬ В TELEGRAM 🚀</a>
+        <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn btn-donate" target="_blank">
+            <div class="title">СВЯЗЬ СО МНОЙ <span>✦</span></div>
+            <div class="sub">Донат от 500₽ = Отвечаю в ЛС + Эксклюзив</div>
         </a>
-        <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn btn-sec" target="_blank">
-            ПОДДЕРЖАТЬ МЕНЯ 💖
-        </a>
-        <a href="https://t.me/lucky_bear_wins" class="btn btn-gold" target="_blank">
-            КРУТИ И ЗАБИРАЙ 🎰
-        </a>
+        <a href="https://t.me/lucky_bear_wins" class="btn btn-bonus" target="_blank">🎁 Забрать фриспины от меня</a>
     </div>
 </div>
+
+<div id="toast" class="toast"></div>
 
 <script>
-const c = document.getElementById('count');
-let n = 118;
-setInterval(() => {
-    n += Math.floor(Math.random() * 5) - 2;
-    if(n < 100) n = 110;
-    if(n > 140) n = 130;
-    c.innerText = n;
-}, 2000);
+    (function() {
+        // Логика FOMO (Страх упущенной выгоды)
+        const spotsCountEl = document.getElementById('spots-count');
+        const progressBar = document.getElementById('progress-bar');
+        let spots = 8;
+        
+        const updateSpots = setInterval(() => {
+            if(spots > 2 && Math.random() > 0.6) {
+                spots--;
+                spotsCountEl.innerText = `${spots} / 100`;
+                progressBar.style.width = `${spots}%`;
+                
+                // Микро-анимация привлечения внимания
+                spotsCountEl.style.transform = "scale(1.2)";
+                spotsCountEl.style.color = "#fff";
+                setTimeout(() => {
+                    spotsCountEl.style.transform = "scale(1)";
+                    spotsCountEl.style.color = "var(--accent)";
+                }, 200);
+            }
+            if(spots <= 2) clearInterval(updateSpots);
+        }, 3500);
+
+        // Движок Social Proof
+        const toast = document.getElementById('toast');
+        const names = ['Алексей', 'Dmitry', 'Ivan_xxx', 'Макс', 'K.S.', 'Никита', 'Anton_99', 'Ghost'];
+        const tips = ['500₽', '1000₽', '300₽', '2500₽'];
+
+        function showToast() {
+            const isTip = Math.random() > 0.7; // 30% донат, 70% вступление
+            const name = names[Math.floor(Math.random() * names.length)];
+            
+            if(isTip) {
+                const amount = tips[Math.floor(Math.random() * tips.length)];
+                toast.innerHTML = `<span class="toast-icon">💸</span> <div>${name} отправил <span class="toast-gold">${amount}</span></div>`;
+                toast.style.borderColor = 'rgba(255, 193, 7, 0.4)';
+            } else {
+                toast.innerHTML = `<span class="toast-icon">🔥</span> <div>${name} <span class="toast-highlight">вступил в VIP</span></div>`;
+                toast.style.borderColor = 'var(--border-light)';
+            }
+
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 3000);
+        }
+
+        setTimeout(() => {
+            showToast();
+            setInterval(showToast, Math.floor(Math.random() * 6000) + 7000);
+        }, 1500);
+    })();
 </script>
 
 </body>
-    </html>
+</html>
+
