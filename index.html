@@ -2,271 +2,253 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Svetlana | Private</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Svetlana | Official Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; -webkit-tap-highlight-color: transparent; }
+        :root {
+            --primary: #ff0055;
+            --secondary: rgba(30, 30, 35, 0.7);
+            --gold: #ffb800;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
         body {
-            background-color: #050505;
+            background-color: #000;
             color: #fff;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            position: relative;
         }
 
-        .bg-image {
+        .bg-layer {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url('https://i.postimg.cc/c4X6kPby/d063b8c76a294fe685b189ff9849abab.jpg');
-            background-size: cover;
-            background-position: center 20%;
-            filter: brightness(0.4) blur(2px); /* Легкий блюр фона добавляет глубины */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://i.postimg.cc/c4X6kPby/d063b8c76a294fe685b189ff9849abab.jpg') center/cover no-repeat;
+            filter: brightness(0.45);
             z-index: -2;
-            transform: scale(1.05); /* Убирает белые полосы по краям */
+            transform: scale(1.05);
         }
 
-        /* Градиент снизу вверх, чтобы текст читался ИДЕАЛЬНО */
-        .bottom-gradient {
+        .gradient-overlay {
             position: fixed;
-            bottom: 0; left: 0; right: 0; height: 70%;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+            bottom: 0; left: 0; width: 100%; height: 75%;
+            background: linear-gradient(0deg, #000 20%, rgba(0,0,0,0.6) 60%, transparent 100%);
             z-index: -1;
         }
 
-        .top-bar {
+        .top-info {
             position: absolute;
-            top: 20px; left: 20px; right: 20px;
+            top: 25px; left: 20px; right: 20px;
             display: flex;
             justify-content: space-between;
-            font-size: 13px;
-            font-weight: 800;
-            z-index: 10;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-        }
-
-        .online-count { display: flex; align-items: center; gap: 8px; }
-        .dot {
-            width: 8px; height: 8px;
-            background-color: #00ff66;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00ff66;
-            animation: pulse-green 2s infinite;
-        }
-
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(0, 255, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
-        }
-
-        .privacy { letter-spacing: 1.5px; color: #a0a0a0; }
-
-        .content-box {
-            padding: 20px 20px 30px 20px;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
+            font-size: 11px;
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             z-index: 10;
         }
 
-        .location {
+        .online { display: flex; align-items: center; gap: 6px; }
+        .dot { 
+            width: 7px; height: 7px; background: #00ff66; border-radius: 50%; 
+            box-shadow: 0 0 10px #00ff66; animation: blink 2s infinite;
+        }
+
+        .wrapper { padding: 20px; width: 100%; max-width: 450px; margin: 0 auto; z-index: 10; }
+
+        .location-tag {
             color: #00ff66;
-            font-size: 14px;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 10px;
+            font-size: 13px;
+            font-weight: 900;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            text-shadow: 0 2px 10px rgba(0,255,102,0.3);
+            gap: 5px;
         }
 
-        h1 {
-            font-size: clamp(38px, 9vw, 46px);
-            font-weight: 900;
-            line-height: 0.95;
-            text-transform: uppercase;
-            margin-bottom: 14px;
-            letter-spacing: -1px;
-        }
-        h1 span { color: #ff0055; }
+        h1 { font-size: 42px; font-weight: 900; line-height: 0.95; text-transform: uppercase; margin-bottom: 12px; }
+        h1 span { color: var(--primary); }
 
-        .desc {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 25px;
-            font-weight: 600;
-            color: #e0e0e0;
-        }
-        .desc b { color: #fff; font-weight: 800; background: rgba(255,0,85,0.2); padding: 2px 6px; border-radius: 4px; }
+        .sub-text { font-size: 15px; font-weight: 700; margin-bottom: 20px; color: #ddd; }
+        .sub-text b { color: #fff; background: rgba(255,0,85,0.3); padding: 0 4px; border-radius: 4px; }
 
-        /* Галерея 2.0 - Дорогой вид */
-        .gallery {
+        .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-bottom: 25px;
         }
 
-        .gallery-item {
+        .item {
             aspect-ratio: 1;
             border-radius: 14px;
-            position: relative;
             overflow: hidden;
-            background: #111;
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .gallery-item img {
+        .item img {
             width: 100%; height: 100%;
             object-fit: cover;
-            filter: blur(10px) brightness(0.8);
-            transform: scale(1.15); 
+            filter: blur(5px) brightness(0.9);
+            transform: scale(1.1);
         }
 
-        /* Виньетка поверх картинок для объема */
-        .gallery-item::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.6) 100%);
-            z-index: 1;
+        .lock-icon {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.25);
+            font-size: 14px;
         }
 
-        .lock {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 16px;
-            z-index: 2;
-            background: rgba(0,0,0,0.4);
-            padding: 6px;
-            border-radius: 50%;
-            backdrop-filter: blur(4px);
-        }
-
-        /* Кнопки - Конверсионная Иерархия */
-        .btn-wrap { display: flex; flex-direction: column; gap: 10px; }
-
-        .btn {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        .cta-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            padding: 18px 10px;
-            border-radius: 16px;
+            padding: 16px 10px;
+            border-radius: 18px;
             text-decoration: none;
-            text-transform: uppercase;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+
+        .cta-btn:active { transform: scale(0.97); }
+
+        .btn-main {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.4);
             position: relative;
             overflow: hidden;
-            transition: transform 0.1s;
         }
-        .btn:active { transform: scale(0.97); }
 
-        /* Мэйн кнопка: Яркая, манящая */
-        .btn-primary {
-            background: linear-gradient(135deg, #ff0055 0%, #b3003b 100%);
-            color: #ffffff;
-            font-size: 17px;
-            font-weight: 900;
-            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.4);
-            border: 1px solid rgba(255,255,255,0.2);
+        .btn-main b { font-size: 17px; font-weight: 900; text-transform: uppercase; }
+        .btn-main span { font-size: 11px; font-weight: 800; opacity: 0.9; margin-top: 2px; letter-spacing: 0.3px; }
+
+        .btn-sub {
+            background: var(--secondary);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
         }
-        .btn-primary span { font-size: 11px; font-weight: 700; opacity: 0.9; margin-top: 3px; color: #ffccd5; }
-        
-        /* Блик на главной кнопке */
-        .btn-primary::after {
+        .btn-sub b { font-size: 15px; font-weight: 800; }
+        .btn-sub span { font-size: 11px; opacity: 0.6; margin-top: 1px; }
+
+        .btn-gold {
+            background: rgba(255, 184, 0, 0.1);
+            border: 1px solid rgba(255, 184, 0, 0.3);
+            color: var(--gold);
+            margin-bottom: 0;
+        }
+
+        .btn-main::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: skewX(-20deg); animation: shine 3s infinite;
+            transform: skewX(-25deg);
+            animation: shine 4s infinite;
         }
-        @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
 
-        /* Второстепенные кнопки (Glassmorphism) */
-        .btn-secondary {
-            background: rgba(30, 30, 35, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
-            font-size: 14px;
-            font-weight: 800;
-            padding: 15px 10px;
-        }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 160%; } 100% { left: 160%; } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         
-        .btn-secondary.gold { border-color: rgba(255, 193, 7, 0.3); }
-        .btn-secondary.gold b { color: #ffc107; font-weight: 900; }
-
-        .btn-secondary span { font-size: 11px; font-weight: 600; color: #aaa; margin-top: 2px; text-transform: none; }
+        /* Анимация при изменении счетчика */
+        .pop { animation: pop-anim 0.4s ease; }
+        @keyframes pop-anim { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
-<div class="bg-image"></div>
-<div class="bottom-gradient"></div>
+<div class="bg-layer"></div>
+<div class="gradient-overlay"></div>
 
-<div class="top-bar">
-    <div class="online-count">
-        <div class="dot"></div>
-        <span id="online-num">115</span> СМОТРЯТ
-    </div>
-    <div class="privacy">PRIVACY: ON</div>
+<div class="top-info">
+    <div class="online"><div class="dot"></div> <span id="viewers">107</span> СМОТРЯТ</div>
+    <div style="opacity: 0.6">PRIVACY: ON</div>
 </div>
 
-<div class="content-box">
-    <div class="location">📍 ТЫ РЯДОМ СО МНОЙ?</div>
-
+<div class="wrapper">
+    <div class="location-tag">📍 ТЫ РЯДОМ СО МНОЙ?</div>
+    
     <h1>ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span> 18+</h1>
-
-    <div class="desc">
-        Залила сюда весь архив без цензуры.<br>
+    
+    <div class="sub-text">
+        Залила архив без цензуры. <br>
         <b>Бесплатно для первых 100 человек.</b>
     </div>
 
-    <div class="gallery">
-        <div class="gallery-item"><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" alt="1"><div class="lock">🔒</div></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" alt="2"><div class="lock">🔒</div></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" alt="3"><div class="lock">🔒</div></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" alt="4"><div class="lock">🔒</div></div>
+    <div class="grid">
+        <div class="item"><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg"><div class="lock-icon">🔒</div></div>
+        <div class="item"><img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg"><div class="lock-icon">🔒</div></div>
+        <div class="item"><img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg"><div class="lock-icon">🔒</div></div>
+        <div class="item"><img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg"><div class="lock-icon">🔒</div></div>
     </div>
 
-    <div class="btn-wrap">
-        <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn btn-primary">
-            ► СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥
-            <span>Осталось 2 бесплатных места</span>
-        </a>
-        
-        <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn btn-secondary" target="_blank">
-            КУПИТЬ VIP ДОСТУП ✦
-            <span>Общение со мной в ЛС (от 500₽)</span>
-        </a>
-        
-        <a href="https://t.me/lucky_bear_wins" class="btn btn-secondary gold" target="_blank">
-            <b>МОЙ ПРОМОКОД НА 5000₽ 🎁</b>
-            <span>Забирай бонус и играй со мной</span>
-        </a>
-    </div>
+    <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn-main cta-btn" id="main-link">
+        <b>СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥</b>
+        <span id="places-text">ОСТАЛОСЬ 5 БЕСПЛАТНЫХ МЕСТ</span>
+    </a>
+
+    <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn-sub cta-btn">
+        <b>КУПИТЬ VIP ДОСТУП ✦</b>
+        <span>Личное общение со мной (от 500₽)</span>
+    </a>
+
+    <a href="https://t.me/lucky_bear_wins" class="btn-sub btn-gold cta-btn">
+        <b>МОЙ ПРОМОКОД НА 5000₽ 🎁</b>
+        <span>Забирай бонус и играй со мной</span>
+    </a>
 </div>
 
+<audio id="push-sound" preload="auto">
+    <source src="https://www.soundjay.com/buttons/sounds/button-30.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-    // Скрипт "Живой онлайн" - плавно меняет цифру, создавая ощущение потока людей
-    const onlineEl = document.getElementById('online-num');
-    let currentOnline = 115;
-    
+    const viewers = document.getElementById('viewers');
+    const places = document.getElementById('places-text');
+    const sound = document.getElementById('push-sound');
+    const mainBtn = document.getElementById('main-link');
+
+    // Функция воспроизведения звука (с обработкой блокировки автоплея)
+    function playNotification() {
+        sound.currentTime = 0;
+        sound.play().catch(() => { /* Браузер блокирует звук без взаимодействия */ });
+    }
+
+    // Динамический онлайн
     setInterval(() => {
-        // Рандомно прибавляем или убавляем от 1 до 3 человек
-        const change = Math.floor(Math.random() * 5) - 2; 
-        currentOnline += change;
-        
-        // Держим цифру в пределах 105 - 125
-        if(currentOnline < 105) currentOnline = 108;
-        if(currentOnline > 125) currentOnline = 122;
-        
-        onlineEl.innerText = currentOnline;
-    }, 3500);
+        let count = parseInt(viewers.innerText);
+        viewers.innerText = count + Math.floor(Math.random() * 3) - 1;
+    }, 4000);
+
+    // Сценарий таяния мест
+    setTimeout(() => {
+        places.innerText = "ОСТАЛОСЬ 3 БЕСПЛАТНЫХ МЕСТА";
+        places.style.color = "#ffeb3b";
+        mainBtn.classList.add('pop');
+        playNotification();
+        setTimeout(() => mainBtn.classList.remove('pop'), 400);
+    }, 6000);
+
+    setTimeout(() => {
+        places.innerText = "ПОСЛЕДНЕЕ МЕСТО ПО ССЫЛКЕ!";
+        places.style.color = "#fff";
+        places.style.fontWeight = "900";
+        mainBtn.classList.add('pop');
+        playNotification();
+        setTimeout(() => mainBtn.classList.remove('pop'), 400);
+    }, 13000);
+
+    // Активация звука при первом клике (нужно для обхода политик Chrome/Safari)
+    document.body.addEventListener('click', () => {
+        sound.muted = false;
+    }, { once: true });
 </script>
 
 </body>
