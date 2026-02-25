@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Эксклюзивный архив Svetlana без цензуры • Только для своих 18+">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Svetlana | Official Access</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <style>
@@ -12,7 +16,13 @@
             --gold: #ffb800;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Montserrat', system-ui, sans-serif; 
+            -webkit-tap-highlight-color: transparent; 
+        }
         
         body {
             background-color: #000;
@@ -45,6 +55,7 @@
             top: 25px; left: 20px; right: 20px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 11px;
             font-weight: 900;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -57,7 +68,36 @@
             box-shadow: 0 0 10px #00ff66; animation: blink 2s infinite;
         }
 
-        .wrapper { padding: 20px; width: 100%; max-width: 450px; margin: 0 auto; z-index: 10; }
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            opacity: 0.6;
+            cursor: pointer;
+            font-weight: 900;
+            transition: all 0.2s;
+            padding: 2px 8px;
+        }
+
+        .lang-btn.active {
+            color: var(--primary);
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .wrapper { 
+            padding: 20px; 
+            width: 100%; 
+            max-width: 450px; 
+            margin: 0 auto; 
+            z-index: 10; 
+        }
 
         .location-tag {
             color: #00ff66;
@@ -69,11 +109,27 @@
             gap: 5px;
         }
 
-        h1 { font-size: 42px; font-weight: 900; line-height: 0.95; text-transform: uppercase; margin-bottom: 12px; }
+        h1 { 
+            font-size: 42px; 
+            font-weight: 900; 
+            line-height: 0.95; 
+            text-transform: uppercase; 
+            margin-bottom: 12px; 
+        }
         h1 span { color: var(--primary); }
 
-        .sub-text { font-size: 15px; font-weight: 700; margin-bottom: 20px; color: #ddd; }
-        .sub-text b { color: #fff; background: rgba(255,0,85,0.3); padding: 0 4px; border-radius: 4px; }
+        .sub-text { 
+            font-size: 15px; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+            color: #ddd; 
+        }
+        .sub-text b { 
+            color: #fff; 
+            background: rgba(255,0,85,0.3); 
+            padding: 0 4px; 
+            border-radius: 4px; 
+        }
 
         .grid {
             display: grid;
@@ -91,15 +147,19 @@
         }
 
         .item img {
-            width: 100%; height: 100%;
+            width: 100%; 
+            height: 100%;
             object-fit: cover;
             filter: blur(5px) brightness(0.9);
             transform: scale(1.1);
         }
 
         .lock-icon {
-            position: absolute; inset: 0;
-            display: flex; align-items: center; justify-content: center;
+            position: absolute; 
+            inset: 0;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
             background: rgba(0,0,0,0.25);
             font-size: 14px;
         }
@@ -117,7 +177,9 @@
             transition: 0.2s;
         }
 
-        .cta-btn:active { transform: scale(0.97); }
+        .cta-btn:active { 
+            transform: scale(0.97); 
+        }
 
         .btn-main {
             background: var(--primary);
@@ -127,8 +189,18 @@
             overflow: hidden;
         }
 
-        .btn-main b { font-size: 17px; font-weight: 900; text-transform: uppercase; }
-        .btn-main span { font-size: 11px; font-weight: 800; opacity: 0.9; margin-top: 2px; letter-spacing: 0.3px; }
+        .btn-main b { 
+            font-size: 17px; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+        }
+        .btn-main span { 
+            font-size: 11px; 
+            font-weight: 800; 
+            opacity: 0.9; 
+            margin-top: 2px; 
+            letter-spacing: 0.3px; 
+        }
 
         .btn-sub {
             background: var(--secondary);
@@ -138,7 +210,11 @@
             color: #fff;
         }
         .btn-sub b { font-size: 15px; font-weight: 800; }
-        .btn-sub span { font-size: 11px; opacity: 0.6; margin-top: 1px; }
+        .btn-sub span { 
+            font-size: 11px; 
+            opacity: 0.6; 
+            margin-top: 1px; 
+        }
 
         .btn-gold {
             background: rgba(255, 184, 0, 0.1);
@@ -148,18 +224,35 @@
         }
 
         .btn-main::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: -100%; 
+            width: 50%; 
+            height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transform: skewX(-25deg);
             animation: shine 4s infinite;
         }
 
-        @keyframes shine { 0% { left: -100%; } 20% { left: 160%; } 100% { left: 160%; } }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes shine { 
+            0% { left: -100%; } 
+            20% { left: 160%; } 
+            100% { left: 160%; } 
+        }
+        @keyframes blink { 
+            0%, 100% { opacity: 1; } 
+            50% { opacity: 0.5; } 
+        }
         
-        /* Анимация при изменении счетчика */
-        .pop { animation: pop-anim 0.4s ease; }
-        @keyframes pop-anim { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .pop { 
+            animation: pop-anim 0.4s ease; 
+        }
+        @keyframes pop-anim { 
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.1); } 
+            100% { transform: scale(1); } 
+        }
     </style>
 </head>
 <body>
@@ -168,40 +261,42 @@
 <div class="gradient-overlay"></div>
 
 <div class="top-info">
-    <div class="online"><div class="dot"></div> <span id="viewers">107</span> СМОТРЯТ</div>
-    <div style="opacity: 0.6">PRIVACY: ON</div>
+    <div class="online"><div class="dot"></div> <span id="viewers">107</span> <span id="viewers-suffix">СМОТРЯТ СЕЙЧАС</span></div>
+    
+    <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="opacity: 0.6" id="privacy-text">PRIVACY: ON</div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="ru">🇷🇺 RU</button>
+            <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+        </div>
+    </div>
 </div>
 
 <div class="wrapper">
-    <div class="location-tag">📍 ТЫ РЯДОМ СО МНОЙ?</div>
+    <div class="location-tag" id="location-text">📍 ТЫ РЯДОМ СО МНОЙ?</div>
     
-    <h1>ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span> 18+</h1>
+    <h1 id="h1-text">ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span> 18+</h1>
     
-    <div class="sub-text">
-        Залила архив без цензуры. <br>
-        <b>Бесплатно для первых 100 человек.</b>
+    <div class="sub-text" id="sub-text">
+        Залила свежий архив без цензуры.<br>
+        <b>Бесплатно для первых посетителей сегодня.</b>
     </div>
 
     <div class="grid">
-        <div class="item"><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg"><div class="lock-icon">🔒</div></div>
-        <div class="item"><img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg"><div class="lock-icon">🔒</div></div>
-        <div class="item"><img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg"><div class="lock-icon">🔒</div></div>
-        <div class="item"><img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg"><div class="lock-icon">🔒</div></div>
+        <div class="item"><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
+        <div class="item"><img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
+        <div class="item"><img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
+        <div class="item"><img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
     </div>
 
-    <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn-main cta-btn" id="main-link">
-        <b>СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥</b>
-        <span id="places-text">ОСТАЛОСЬ 5 БЕСПЛАТНЫХ МЕСТ</span>
+    <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn-main cta-btn" id="main-link" target="_blank" rel="noopener noreferrer">
+        <b id="main-btn-text">СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥</b>
+        <span id="places-text">ОСТАЛОСЬ 7 БЕСПЛАТНЫХ МЕСТ</span>
     </a>
 
-    <a href="https://new.donatepay.ru/@Svetlana_1993" class="btn-sub cta-btn">
-        <b>КУПИТЬ VIP ДОСТУП ✦</b>
-        <span>Личное общение со мной (от 500₽)</span>
-    </a>
-
-    <a href="https://t.me/lucky_bear_wins" class="btn-sub btn-gold cta-btn">
-        <b>МОЙ ПРОМОКОД НА 5000₽ 🎁</b>
-        <span>Забирай бонус и играй со мной</span>
+    <a href="https://t.me/lucky_bear_wins" class="btn-sub btn-gold cta-btn" target="_blank" rel="noopener noreferrer">
+        <b id="gold-btn-text">МОЙ ПРОМОКОД НА 5000₽ 🎁</b>
+        <span id="gold-sub-text">Забирай бонус и играй со мной</span>
     </a>
 </div>
 
@@ -210,45 +305,140 @@
 </audio>
 
 <script>
-    const viewers = document.getElementById('viewers');
-    const places = document.getElementById('places-text');
-    const sound = document.getElementById('push-sound');
-    const mainBtn = document.getElementById('main-link');
+    'use strict';
 
-    // Функция воспроизведения звука (с обработкой блокировки автоплея)
-    function playNotification() {
-        sound.currentTime = 0;
-        sound.play().catch(() => { /* Браузер блокирует звук без взаимодействия */ });
+    const translations = {
+        ru: {
+            viewersSuffix: "СМОТРЯТ СЕЙЧАС",
+            location: "📍 ТЫ РЯДОМ СО МНОЙ?",
+            h1: "ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span> 18+",
+            subText: "Залила свежий архив без цензуры.<br><b>Бесплатно для первых посетителей сегодня.</b>",
+            mainBtn: "СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥",
+            goldBtn: "МОЙ ПРОМОКОД НА 5000₽ 🎁",
+            goldSub: "Забирай бонус и играй со мной",
+            placesStages: [
+                { text: "ОСТАЛОСЬ 7 БЕСПЛАТНЫХ МЕСТ", color: "#ffeb3b" },
+                { text: "ОСТАЛОСЬ 5 БЕСПЛАТНЫХ МЕСТ", color: "#ffeb3b" },
+                { text: "ОСТАЛОСЬ 3 БЕСПЛАТНЫХ МЕСТА", color: "#ffeb3b" },
+                { text: "ПОСЛЕДНЕЕ МЕСТО ПО ССЫЛКЕ!", color: "#ffffff", weight: "900" }
+            ]
+        },
+        en: {
+            viewersSuffix: "WATCHING NOW",
+            location: "📍 ARE YOU NEAR ME?",
+            h1: "ACCESS ONLY<br>FOR <span>YOUR OWN</span> 18+",
+            subText: "Uploaded a fresh uncensored archive.<br><b>Free for the first visitors today.</b>",
+            mainBtn: "WATCH UNCENSORED 🔥",
+            goldBtn: "MY $60 BONUS CODE 🎁",
+            goldSub: "Claim the bonus and play with me",
+            placesStages: [
+                { text: "7 FREE SPOTS LEFT", color: "#ffeb3b" },
+                { text: "5 FREE SPOTS LEFT", color: "#ffeb3b" },
+                { text: "3 FREE SPOTS LEFT", color: "#ffeb3b" },
+                { text: "LAST SPOT LEFT! TAP NOW!", color: "#ffffff", weight: "900" }
+            ]
+        }
+    };
+
+    let currentLang = 'ru';
+    let stage = 0;
+    let viewers = 107;
+
+    const viewersEl = document.getElementById('viewers');
+    const viewersSuffixEl = document.getElementById('viewers-suffix');
+    const locationEl = document.getElementById('location-text');
+    const h1El = document.getElementById('h1-text');
+    const subEl = document.getElementById('sub-text');
+    const mainBtnText = document.getElementById('main-btn-text');
+    const placesEl = document.getElementById('places-text');
+    const goldBtnText = document.getElementById('gold-btn-text');
+    const goldSubText = document.getElementById('gold-sub-text');
+    const sound = document.getElementById('push-sound');
+    const mainLink = document.getElementById('main-link');
+
+    function switchLanguage(lang) {
+        if (!translations[lang]) return;
+        currentLang = lang;
+        const t = translations[lang];
+
+        viewersSuffixEl.textContent = t.viewersSuffix;
+        locationEl.innerHTML = t.location;
+        h1El.innerHTML = t.h1;
+        subEl.innerHTML = t.subText;
+        mainBtnText.textContent = t.mainBtn;
+        goldBtnText.textContent = t.goldBtn;
+        goldSubText.textContent = t.goldSub;
+
+        updatePlacesText();
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+
+        localStorage.setItem('preferredLang', lang);
     }
 
-    // Динамический онлайн
-    setInterval(() => {
-        let count = parseInt(viewers.innerText);
-        viewers.innerText = count + Math.floor(Math.random() * 3) - 1;
-    }, 4000);
+    function updatePlacesText() {
+        const t = translations[currentLang];
+        if (stage < t.placesStages.length) {
+            const current = t.placesStages[stage];
+            placesEl.innerText = current.text;
+            if (current.color) placesEl.style.color = current.color;
+            if (current.weight) placesEl.style.fontWeight = current.weight;
+        }
+    }
 
-    // Сценарий таяния мест
-    setTimeout(() => {
-        places.innerText = "ОСТАЛОСЬ 3 БЕСПЛАТНЫХ МЕСТА";
-        places.style.color = "#ffeb3b";
-        mainBtn.classList.add('pop');
+    function updateViewers() {
+        const change = Math.floor(Math.random() * 5) - 2;
+        viewers = Math.max(92, Math.min(165, viewers + change));
+        viewersEl.innerText = viewers;
+        viewersEl.classList.add('pop');
+        setTimeout(() => viewersEl.classList.remove('pop'), 400);
+    }
+
+    function playNotification() {
+        if (sound) {
+            sound.currentTime = 0;
+            sound.play().catch(() => {});
+        }
+    }
+
+    function triggerPlaceUpdate() {
+        if (stage >= translations[currentLang].placesStages.length - 1) return;
+        stage++;
+        updatePlacesText();
+        mainLink.classList.add('pop');
         playNotification();
-        setTimeout(() => mainBtn.classList.remove('pop'), 400);
-    }, 6000);
+        setTimeout(() => mainLink.classList.remove('pop'), 420);
+    }
 
-    setTimeout(() => {
-        places.innerText = "ПОСЛЕДНЕЕ МЕСТО ПО ССЫЛКЕ!";
-        places.style.color = "#fff";
-        places.style.fontWeight = "900";
-        mainBtn.classList.add('pop');
-        playNotification();
-        setTimeout(() => mainBtn.classList.remove('pop'), 400);
-    }, 13000);
+    function init() {
+        const savedLang = localStorage.getItem('preferredLang') || 
+                         (navigator.language.startsWith('ru') ? 'ru' : 'en');
+        switchLanguage(savedLang);
 
-    // Активация звука при первом клике (нужно для обхода политик Chrome/Safari)
-    document.body.addEventListener('click', () => {
-        sound.muted = false;
-    }, { once: true });
+        setTimeout(triggerPlaceUpdate, 6500);
+        setTimeout(triggerPlaceUpdate, 13500);
+        setTimeout(triggerPlaceUpdate, 19500);
+
+        setInterval(updateViewers, 3500);
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+        });
+
+        let audioUnlocked = false;
+        document.body.addEventListener('touchstart', () => {
+            if (!audioUnlocked && sound) {
+                sound.muted = false;
+                audioUnlocked = true;
+            }
+        }, { once: true });
+
+        mainLink.addEventListener('click', playNotification);
+    }
+
+    window.onload = init;
 </script>
 
 </body>
