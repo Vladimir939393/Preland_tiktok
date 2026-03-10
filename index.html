@@ -1,445 +1,450 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="description" content="Эксклюзивный архив Svetlana без цензуры • Только для своих 18+">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Svetlana | Official Access</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ff0055;
-            --secondary: rgba(30, 30, 35, 0.7);
-            --gold: #ffb800;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Svetlana93 — приватный Telegram 18+ со свежим архивом фото и видео. Быстрый вход, обновления и доступ только для своих." />
+  <meta property="og:title" content="Svetlana93 — приватный Telegram 18+ | свежий архив" />
+  <meta property="og:description" content="Эксклюзивный приват без цензуры. Доступ для первых сегодня. Только 18+." />
+  <meta property="og:image" content="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" />
+  <meta property="og:type" content="website" />
+  <title>Svetlana93 — приватный Telegram 18+ | свежий архив</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #ff0055;
+      --gold: #ffd700;
+      --gold-dark: #d4af37;
+      --bg: #000000;
+      --glass: rgba(30,30,35,0.38);
+    }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Montserrat', system-ui, sans-serif; 
-            -webkit-tap-highlight-color: transparent; 
-        }
-        
-        body {
-            background-color: #000;
-            color: #fff;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        .bg-layer {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://i.postimg.cc/c4X6kPby/d063b8c76a294fe685b189ff9849abab.jpg') center/cover no-repeat;
-            filter: brightness(0.45);
-            z-index: -2;
-            transform: scale(1.05);
-        }
+    body {
+      background: var(--bg);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,215,0,0.025) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.065'/%3E%3C/svg%3E");
+    }
 
-        .gradient-overlay {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 75%;
-            background: linear-gradient(0deg, #000 20%, rgba(0,0,0,0.6) 60%, transparent 100%);
-            z-index: -1;
-        }
+    .tg-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 48px;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-weight: 600;
+      font-size: 16px;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
 
-        .top-info {
-            position: absolute;
-            top: 25px; left: 20px; right: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            font-weight: 900;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            z-index: 10;
-        }
+    .online-dot {
+      width: 9px; height: 9px;
+      background: #34c759;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #34c75988;
+      animation: blink 2.4s infinite;
+    }
 
-        .online { display: flex; align-items: center; gap: 6px; }
-        .dot { 
-            width: 7px; height: 7px; background: #00ff66; border-radius: 50%; 
-            box-shadow: 0 0 10px #00ff66; animation: blink 2s infinite;
-        }
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      background: url('https://i.postimg.cc/c4X6kPby/d063b8c76a294fe685b189ff9849abab.jpg') center/cover no-repeat;
+      filter: brightness(0.38) contrast(1.12);
+      z-index: -2;
+    }
 
-        .lang-switcher {
-            display: flex;
-            gap: 10px;
-            font-size: 13px;
-        }
+    .gradient-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 28%, #000 65%);
+      z-index: -1;
+    }
 
-        .lang-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            opacity: 0.6;
-            cursor: pointer;
-            font-weight: 900;
-            transition: all 0.2s;
-            padding: 2px 8px;
-        }
+    .wrapper {
+      padding: 64px 20px 60px;
+      max-width: 460px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
 
-        .lang-btn.active {
-            color: var(--primary);
-            opacity: 1;
-            text-decoration: underline;
-        }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem;
+      font-weight: 800;
+      line-height: 0.94;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: -0.8px;
+    }
+    h1 span { color: var(--primary); }
 
-        .wrapper { 
-            padding: 20px; 
-            width: 100%; 
-            max-width: 450px; 
-            margin: 0 auto; 
-            z-index: 10; 
-        }
+    .urgency-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      background: rgba(255,215,0,0.07);
+      border: 1px solid rgba(255,215,0,0.18);
+      border-radius: 999px;
+      padding: 8px 16px;
+      margin: 0 auto 24px;
+      text-align: center;
+    }
 
-        .location-tag {
-            color: #00ff66;
-            font-size: 13px;
-            font-weight: 900;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+    .countdown {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+      text-shadow: 0 0 12px rgba(255,215,0,0.4);
+      letter-spacing: 1.2px;
+      text-align: center;
+      margin: 16px 0 32px;
+    }
 
-        h1 { 
-            font-size: 42px; 
-            font-weight: 900; 
-            line-height: 0.95; 
-            text-transform: uppercase; 
-            margin-bottom: 12px; 
-        }
-        h1 span { color: var(--primary); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 24px 0 40px;
+    }
 
-        .sub-text { 
-            font-size: 15px; 
-            font-weight: 700; 
-            margin-bottom: 20px; 
-            color: #ddd; 
-        }
-        .sub-text b { 
-            color: #fff; 
-            background: rgba(255,0,85,0.3); 
-            padding: 0 4px; 
-            border-radius: 4px; 
-        }
+    .item {
+      aspect-ratio: 1;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,215,0,0.1);
+      transition: all 0.42s ease;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 25px;
-        }
+    .item:hover {
+      transform: scale(1.04);
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(255,215,0,0.38);
+    }
 
-        .item {
-            aspect-ratio: 1;
-            border-radius: 14px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+    .item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: blur(6px) brightness(0.88);
+      transition: all 0.5s ease;
+    }
 
-        .item img {
-            width: 100%; 
-            height: 100%;
-            object-fit: cover;
-            filter: blur(5px) brightness(0.9);
-            transform: scale(1.1);
-        }
+    .item:hover img { filter: blur(0) brightness(1); }
 
-        .lock-icon {
-            position: absolute; 
-            inset: 0;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            background: rgba(0,0,0,0.25);
-            font-size: 14px;
-        }
+    .lock {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      background: rgba(0,0,0,0.38);
+      transition: opacity 0.4s;
+    }
 
-        .cta-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 16px 10px;
-            border-radius: 18px;
-            text-decoration: none;
-            margin-bottom: 10px;
-            transition: 0.2s;
-        }
+    .reviews {
+      margin: 32px 0 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
-        .cta-btn:active { 
-            transform: scale(0.97); 
-        }
+    .review {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,215,0,0.12);
+    }
 
-        .btn-main {
-            background: var(--primary);
-            color: #fff;
-            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
 
-        .btn-main b { 
-            font-size: 17px; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-        }
-        .btn-main span { 
-            font-size: 11px; 
-            font-weight: 800; 
-            opacity: 0.9; 
-            margin-top: 2px; 
-            letter-spacing: 0.3px; 
-        }
+    .avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(212,175,55,0.5);
+      box-shadow: 0 0 8px rgba(212,175,55,0.2);
+    }
 
-        .btn-sub {
-            background: var(--secondary);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.08);
-            color: #fff;
-        }
-        .btn-sub b { font-size: 15px; font-weight: 800; }
-        .btn-sub span { 
-            font-size: 11px; 
-            opacity: 0.6; 
-            margin-top: 1px; 
-        }
+    .name { font-weight: 700; font-size: 13.5px; }
+    .text { font-size: 13.5px; line-height: 1.38; opacity: 0.94; }
 
-        .btn-gold {
-            background: rgba(255, 184, 0, 0.1);
-            border: 1px solid rgba(255, 184, 0, 0.3);
-            color: var(--gold);
-            margin-bottom: 0;
-        }
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 18px 20px;
+      border-radius: 20px;
+      text-align: center;
+      text-decoration: none;
+      margin-bottom: 16px;
+      font-weight: 800;
+      transition: all 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .btn-main::after {
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: -100%; 
-            width: 50%; 
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: skewX(-25deg);
-            animation: shine 4s infinite;
-        }
+    .cta-main {
+      background: linear-gradient(135deg, var(--primary), #d60044);
+      color: white;
+      box-shadow: 0 10px 28px rgba(255,0,85,0.42);
+      animation: breathe-glow 4.8s infinite ease-in-out;
+    }
 
-        @keyframes shine { 
-            0% { left: -100%; } 
-            20% { left: 160%; } 
-            100% { left: 160%; } 
-        }
-        @keyframes blink { 
-            0%, 100% { opacity: 1; } 
-            50% { opacity: 0.5; } 
-        }
-        
-        .pop { 
-            animation: pop-anim 0.4s ease; 
-        }
-        @keyframes pop-anim { 
-            0% { transform: scale(1); } 
-            50% { transform: scale(1.1); } 
-            100% { transform: scale(1); } 
-        }
-    </style>
+    .cta-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(255,0,85,0.55);
+    }
+
+    .cta-gold {
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,215,0,0.26);
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .cta-gold:hover {
+      background: rgba(50,50,60,0.48);
+      border-color: var(--gold);
+    }
+
+    .shine::after {
+      content: '';
+      position: absolute;
+      top: -60%; left: -120%;
+      width: 70%; height: 220%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
+      transform: skewX(-20deg);
+      animation: shine 6s infinite;
+    }
+
+    @keyframes shine {
+      0%   { left: -120%; }
+      25%  { left: 140%; }
+      100% { left: 140%; }
+    }
+
+    @keyframes breathe-glow {
+      0%,100% { box-shadow: 0 10px 28px rgba(255,0,85,0.42); }
+      50%     { box-shadow: 0 14px 40px rgba(255,0,85,0.58); }
+    }
+
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.42; } }
+
+    .places { font-size: 15px; font-weight: 800; margin-top: 8px; }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 3rem; }
+      .wrapper { padding: 60px 16px 56px; }
+    }
+  </style>
 </head>
 <body>
 
 <div class="bg-layer"></div>
 <div class="gradient-overlay"></div>
 
-<div class="top-info">
-    <div class="online"><div class="dot"></div> <span id="viewers">107</span> <span id="viewers-suffix">СМОТРЯТ СЕЙЧАС</span></div>
-    
-    <div style="display: flex; align-items: center; gap: 16px;">
-        <div style="opacity: 0.6" id="privacy-text">PRIVACY: ON</div>
-        <div class="lang-switcher">
-            <button class="lang-btn active" data-lang="ru">🇷🇺 RU</button>
-            <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
-        </div>
-    </div>
+<div class="tg-header">
+  <div>Svetlana | Private 18+</div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="online-dot"></div>
+    <span id="viewers">114</span> онлайн
+  </div>
 </div>
 
 <div class="wrapper">
-    <div class="location-tag" id="location-text">📍 ТЫ РЯДОМ СО МНОЙ?</div>
-    
-    <h1 id="h1-text">ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span> 18+</h1>
-    
-    <div class="sub-text" id="sub-text">
-        Залила свежий архив без цензуры.<br>
-        <b>Бесплатно для первых посетителей сегодня.</b>
+
+  <h1 id="title">ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span></h1>
+
+  <div class="urgency-pill" id="urgency">Свежий архив без цензуры • Бесплатно для первых сегодня</div>
+
+  <div class="countdown" id="countdown">АКЦИЯ ЗАКАНЧИВАЕТСЯ ЧЕРЕЗ: —:--:--</div>
+
+  <div class="grid">
+    <div class="item"><img loading="lazy" src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" alt="preview"><div class="lock">🔒</div></div>
+    <div class="item"><img loading="lazy" src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" alt="preview"><div class="lock">🔒</div></div>
+    <div class="item"><img loading="lazy" src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" alt="preview"><div class="lock">🔒</div></div>
+    <div class="item"><img loading="lazy" src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" alt="preview"><div class="lock">🔒</div></div>
+  </div>
+
+  <div class="reviews">
+    <div class="review">
+      <div class="review-header">
+        <img class="avatar" src="https://i.pravatar.cc/80?img=45" alt="avatar">
+        <div class="name">Кира 🔥</div>
+      </div>
+      <div class="text">Уже внутри, это просто пиздец как горячо 😈 Бери скорее</div>
     </div>
-
-    <div class="grid">
-        <div class="item"><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
-        <div class="item"><img src="https://i.postimg.cc/mrX9QYZB/IMG-20260201-221756-995.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
-        <div class="item"><img src="https://i.postimg.cc/MK2QbKwM/IMG-20260201-221719-024.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
-        <div class="item"><img src="https://i.postimg.cc/CKQZZwJn/IMG-20260201-221451-538.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
+    <div class="review">
+      <div class="review-header">
+        <img class="avatar" src="https://i.pravatar.cc/80?img=68" alt="avatar">
+        <div class="name">Аня 22</div>
+      </div>
+      <div class="text">Лучший приват ever, кончила два раза уже 💦 Рекомендую</div>
     </div>
+    <div class="review">
+      <div class="review-header">
+        <img class="avatar" src="https://i.pravatar.cc/80?img=33" alt="avatar">
+        <div class="name">Лера ❤️</div>
+      </div>
+      <div class="text">Серьёзно, такого контента нигде больше нет. Заходи!</div>
+    </div>
+    <div class="review">
+      <div class="review-header">
+        <img class="avatar" src="https://i.pravatar.cc/80?img=57" alt="avatar">
+        <div class="name">Милана</div>
+      </div>
+      <div class="text">Спасибо что выложила, огонь 🔥 Уже третье видео смотрю</div>
+    </div>
+  </div>
 
-    <a href="https://t.me/+JP-STmmmSH1mZThi" class="btn-main cta-btn" id="main-link" target="_blank" rel="noopener noreferrer">
-        <b id="main-btn-text">СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥</b>
-        <span id="places-text">ОСТАЛОСЬ 7 БЕСПЛАТНЫХ МЕСТ</span>
-    </a>
+  <a href="https://t.me/+JP-STmmmSH1mZThi" class="cta cta-main shine" target="_blank" rel="noopener noreferrer">
+    <div style="font-size:19px;">СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥</div>
+    <div class="places" id="places">ОСТАЛОСЬ 10 БЕСПЛАТНЫХ МЕСТ</div>
+  </a>
 
-    <a href="https://t.me/lucky_bear_wins" class="btn-sub btn-gold cta-btn" target="_blank" rel="noopener noreferrer">
-        <b id="gold-btn-text">МОЙ ПРОМОКОД НА 5000₽ 🎁</b>
-        <span id="gold-sub-text">Забирай бонус и играй со мной</span>
-    </a>
+  <a href="https://t.me/lucky_bear_wins" class="cta cta-gold" target="_blank" rel="noopener noreferrer">
+    <div style="font-size:17px;">МОЙ БОНУС 5000₽ 🎁</div>
+    <div style="font-size:13px;opacity:0.9;margin-top:4px;">Забирай и играй со мной</div>
+  </a>
+
 </div>
 
-<audio id="push-sound" preload="auto">
-    <source src="https://www.soundjay.com/buttons/sounds/button-30.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-    'use strict';
+  'use strict';
 
-    const translations = {
-        ru: {
-            viewersSuffix: "СМОТРЯТ СЕЙЧАС",
-            location: "📍 ТЫ РЯДОМ СО МНОЙ?",
-            h1: "ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span> 18+",
-            subText: "Залила свежий архив без цензуры.<br><b>Бесплатно для первых посетителей сегодня.</b>",
-            mainBtn: "СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥",
-            goldBtn: "МОЙ ПРОМОКОД НА 5000₽ 🎁",
-            goldSub: "Забирай бонус и играй со мной",
-            placesStages: [
-                { text: "ОСТАЛОСЬ 7 БЕСПЛАТНЫХ МЕСТ", color: "#ffeb3b" },
-                { text: "ОСТАЛОСЬ 5 БЕСПЛАТНЫХ МЕСТ", color: "#ffeb3b" },
-                { text: "ОСТАЛОСЬ 3 БЕСПЛАТНЫХ МЕСТА", color: "#ffeb3b" },
-                { text: "ПОСЛЕДНЕЕ МЕСТО ПО ССЫЛКЕ!", color: "#ffffff", weight: "900" }
-            ]
-        },
-        en: {
-            viewersSuffix: "WATCHING NOW",
-            location: "📍 ARE YOU NEAR ME?",
-            h1: "ACCESS ONLY<br>FOR <span>YOUR OWN</span> 18+",
-            subText: "Uploaded a fresh uncensored archive.<br><b>Free for the first visitors today.</b>",
-            mainBtn: "WATCH UNCENSORED 🔥",
-            goldBtn: "MY $60 BONUS CODE 🎁",
-            goldSub: "Claim the bonus and play with me",
-            placesStages: [
-                { text: "7 FREE SPOTS LEFT", color: "#ffeb3b" },
-                { text: "5 FREE SPOTS LEFT", color: "#ffeb3b" },
-                { text: "3 FREE SPOTS LEFT", color: "#ffeb3b" },
-                { text: "LAST SPOT LEFT! TAP NOW!", color: "#ffffff", weight: "900" }
-            ]
-        }
-    };
+  const translations = {
+    ru: {
+      title: "ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span>",
+      urgency: "Свежий архив без цензуры • Бесплатно для первых сегодня",
+      placesStart: 10,
+      placesTexts: n => n > 3
+        ? `ОСТАЛОСЬ ${n} БЕСПЛАТНЫХ МЕСТ`
+        : n === 1
+          ? "ПОСЛЕДНЕЕ МЕСТО! ЖМИ СЕЙЧАС"
+          : `ОСТАЛОСЬ ${n} МЕСТА!`,
+      placesColor: n => n <= 2 ? "#ff4444" : n <= 4 ? "#ffaa00" : "#ffeb3b"
+    },
+    en: {
+      title: "ACCESS ONLY<br>FOR <span>YOUR OWN</span>",
+      urgency: "Fresh uncensored archive • Free for first visitors today",
+      placesStart: 10,
+      placesTexts: n => n > 3
+        ? `${n} FREE SPOTS LEFT`
+        : n === 1
+          ? "LAST SPOT! TAP NOW"
+          : `${n} SPOTS LEFT!`,
+      placesColor: n => n <= 2 ? "#ff4444" : n <= 4 ? "#ffaa00" : "#ffeb3b"
+    }
+  };
 
-    let currentLang = 'ru';
-    let stage = 0;
-    let viewers = 107;
+  let lang = localStorage.getItem('lang') || (navigator.language.startsWith('ru') ? 'ru' : 'en');
+  let t = translations[lang];
 
-    const viewersEl = document.getElementById('viewers');
-    const viewersSuffixEl = document.getElementById('viewers-suffix');
-    const locationEl = document.getElementById('location-text');
-    const h1El = document.getElementById('h1-text');
-    const subEl = document.getElementById('sub-text');
-    const mainBtnText = document.getElementById('main-btn-text');
-    const placesEl = document.getElementById('places-text');
-    const goldBtnText = document.getElementById('gold-btn-text');
-    const goldSubText = document.getElementById('gold-sub-text');
-    const sound = document.getElementById('push-sound');
-    const mainLink = document.getElementById('main-link');
+  let viewers = 114;
+  let startTime = parseInt(localStorage.getItem('startTime'), 10);
+  if (!startTime || Number.isNaN(startTime)) {
+    startTime = Date.now();
+    localStorage.setItem('startTime', startTime);
+  }
 
-    function switchLanguage(lang) {
-        if (!translations[lang]) return;
-        currentLang = lang;
-        const t = translations[lang];
+  let places = parseInt(localStorage.getItem('places'), 10);
+  if (!places || Number.isNaN(places)) {
+    places = t.placesStart;
+    localStorage.setItem('places', places);
+  }
 
-        viewersSuffixEl.textContent = t.viewersSuffix;
-        locationEl.innerHTML = t.location;
-        h1El.innerHTML = t.h1;
-        subEl.innerHTML = t.subText;
-        mainBtnText.textContent = t.mainBtn;
-        goldBtnText.textContent = t.goldBtn;
-        goldSubText.textContent = t.goldSub;
+  const DURATION = 75 * 60 * 1000; // 75 минут
 
-        updatePlacesText();
+  const els = {
+    viewers: document.getElementById('viewers'),
+    title: document.getElementById('title'),
+    urgency: document.getElementById('urgency'),
+    countdown: document.getElementById('countdown'),
+    places: document.getElementById('places')
+  };
 
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
+  function updatePlaces() {
+    els.places.textContent = t.placesTexts(places);
+    els.places.style.color = t.placesColor(places);
+  }
 
-        localStorage.setItem('preferredLang', lang);
+  function updateCountdown() {
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(0, DURATION - elapsed);
+
+    if (remaining <= 0) {
+      els.countdown.textContent = lang === 'ru' ? 'АКЦИЯ ЗАВЕРШЕНА' : 'OFFER ENDED';
+      return;
     }
 
-    function updatePlacesText() {
-        const t = translations[currentLang];
-        if (stage < t.placesStages.length) {
-            const current = t.placesStages[stage];
-            placesEl.innerText = current.text;
-            if (current.color) placesEl.style.color = current.color;
-            if (current.weight) placesEl.style.fontWeight = current.weight;
-        }
+    const h = Math.floor(remaining / 3600000);
+    const m = Math.floor((remaining % 3600000) / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
+
+    els.countdown.textContent = lang === 'ru'
+      ? `АКЦИЯ ЗАКАНЧИВАЕТСЯ ЧЕРЕЗ: \( {String(h).padStart(2,'0')}: \){String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
+      : `OFFER ENDS IN: \( {String(h).padStart(2,'0')}: \){String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+
+  function updateViewers() {
+    const delta = Math.floor(Math.random() * 5) - 2;
+    viewers = Math.max(105, Math.min(178, viewers + delta));
+    els.viewers.textContent = viewers;
+  }
+
+  function decreasePlaces() {
+    if (places > 1) {
+      places--;
+      localStorage.setItem('places', places);
+      updatePlaces();
     }
+  }
 
-    function updateViewers() {
-        const change = Math.floor(Math.random() * 5) - 2;
-        viewers = Math.max(92, Math.min(165, viewers + change));
-        viewersEl.innerText = viewers;
-        viewersEl.classList.add('pop');
-        setTimeout(() => viewersEl.classList.remove('pop'), 400);
-    }
+  // init
+  els.title.innerHTML = t.title;
+  els.urgency.textContent = t.urgency;
+  updateCountdown();
+  updatePlaces();
 
-    function playNotification() {
-        if (sound) {
-            sound.currentTime = 0;
-            sound.play().catch(() => {});
-        }
-    }
+  setInterval(updateCountdown, 970);
+  setInterval(updateViewers, 6800 + Math.random()*5000);
 
-    function triggerPlaceUpdate() {
-        if (stage >= translations[currentLang].placesStages.length - 1) return;
-        stage++;
-        updatePlacesText();
-        mainLink.classList.add('pop');
-        playNotification();
-        setTimeout(() => mainLink.classList.remove('pop'), 420);
-    }
-
-    function init() {
-        const savedLang = localStorage.getItem('preferredLang') || 
-                         (navigator.language.startsWith('ru') ? 'ru' : 'en');
-        switchLanguage(savedLang);
-
-        setTimeout(triggerPlaceUpdate, 6500);
-        setTimeout(triggerPlaceUpdate, 13500);
-        setTimeout(triggerPlaceUpdate, 19500);
-
-        setInterval(updateViewers, 3500);
-
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
-        });
-
-        let audioUnlocked = false;
-        document.body.addEventListener('touchstart', () => {
-            if (!audioUnlocked && sound) {
-                sound.muted = false;
-                audioUnlocked = true;
-            }
-        }, { once: true });
-
-        mainLink.addEventListener('click', playNotification);
-    }
-
-    window.onload = init;
+  // рандомное уменьшение мест
+  function scheduleDecrease() {
+    const delay = 65000 + Math.random() * 45000;
+    setTimeout(() => {
+      decreasePlaces();
+      scheduleDecrease();
+    }, delay);
+  }
+  scheduleDecrease();
 </script>
-
 </body>
 </html>
