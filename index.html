@@ -14,29 +14,42 @@
             --primary: #ff0055;
             --secondary: rgba(30, 30, 35, 0.7);
             --gold: #ffb800;
+            --support: rgba(255, 255, 255, 0.08);
+            --support-border: rgba(255, 255, 255, 0.14);
+            --support-text: #ffd6e6;
         }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Montserrat', system-ui, sans-serif; 
-            -webkit-tap-highlight-color: transparent; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', system-ui, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
-        
+
+        html, body {
+            min-height: 100%;
+        }
+
         body {
             background-color: #000;
             color: #fff;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .bg-layer {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: url('https://i.postimg.cc/c4X6kPby/d063b8c76a294fe685b189ff9849abab.jpg') center/cover no-repeat;
             filter: brightness(0.45);
             z-index: -2;
@@ -45,14 +58,20 @@
 
         .gradient-overlay {
             position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 75%;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 75%;
             background: linear-gradient(0deg, #000 20%, rgba(0,0,0,0.6) 60%, transparent 100%);
             z-index: -1;
+            pointer-events: none;
         }
 
         .top-info {
             position: absolute;
-            top: 25px; left: 20px; right: 20px;
+            top: 25px;
+            left: 20px;
+            right: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -62,10 +81,19 @@
             z-index: 10;
         }
 
-        .online { display: flex; align-items: center; gap: 6px; }
-        .dot { 
-            width: 7px; height: 7px; background: #00ff66; border-radius: 50%; 
-            box-shadow: 0 0 10px #00ff66; animation: blink 2s infinite;
+        .online {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background: #00ff66;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff66;
+            animation: blink 2s infinite;
         }
 
         .lang-switcher {
@@ -91,12 +119,12 @@
             text-decoration: underline;
         }
 
-        .wrapper { 
-            padding: 20px; 
-            width: 100%; 
-            max-width: 450px; 
-            margin: 0 auto; 
-            z-index: 10; 
+        .wrapper {
+            padding: 20px 20px calc(24px + env(safe-area-inset-bottom));
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            z-index: 10;
         }
 
         .location-tag {
@@ -109,26 +137,46 @@
             gap: 5px;
         }
 
-        h1 { 
-            font-size: 42px; 
-            font-weight: 900; 
-            line-height: 0.95; 
-            text-transform: uppercase; 
-            margin-bottom: 12px; 
+        h1 {
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
-        h1 span { color: var(--primary); }
 
-        .sub-text { 
-            font-size: 15px; 
-            font-weight: 700; 
-            margin-bottom: 20px; 
-            color: #ddd; 
+        h1 span {
+            color: var(--primary);
         }
-        .sub-text b { 
-            color: #fff; 
-            background: rgba(255,0,85,0.3); 
-            padding: 0 4px; 
-            border-radius: 4px; 
+
+        .sub-text {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: #ddd;
+        }
+
+        .sub-text b {
+            color: #fff;
+            background: rgba(255,0,85,0.3);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .trust-line {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.78);
+            margin-bottom: 20px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .grid {
@@ -144,7 +192,7 @@
             overflow: hidden;
             position: relative;
             border: 1px solid rgba(255,255,255,0.1);
-            cursor: pointer; /* добавлено для кликабельности */
+            cursor: pointer;
             transition: transform 0.2s ease;
         }
 
@@ -153,18 +201,19 @@
         }
 
         .item img {
-            width: 100%; 
+            width: 100%;
             height: 100%;
             object-fit: cover;
             filter: blur(5px) brightness(0.9);
             transform: scale(1.1);
+            display: block;
         }
 
         .lock-icon {
-            position: absolute; 
+            position: absolute;
             inset: 0;
-            display: flex; 
-            align-items: center; 
+            display: flex;
+            align-items: center;
             justify-content: center;
             background: rgba(0,0,0,0.25);
             font-size: 14px;
@@ -176,15 +225,22 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            padding: 16px 10px;
+            min-height: 64px;
+            padding: 16px 12px;
             border-radius: 18px;
             text-decoration: none;
             margin-bottom: 10px;
-            transition: 0.2s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+            text-align: center;
+            will-change: transform;
         }
 
-        .cta-btn:active { 
-            transform: scale(0.97); 
+        .cta-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .cta-btn:active {
+            transform: scale(0.97);
         }
 
         .btn-main {
@@ -193,19 +249,25 @@
             box-shadow: 0 8px 25px rgba(255, 0, 85, 0.4);
             position: relative;
             overflow: hidden;
+            animation: pulse-main 2.8s ease-in-out infinite;
         }
 
-        .btn-main b { 
-            font-size: 17px; 
-            font-weight: 900; 
-            text-transform: uppercase; 
+        .btn-main:hover {
+            box-shadow: 0 10px 28px rgba(255, 0, 85, 0.45);
         }
-        .btn-main span { 
-            font-size: 11px; 
-            font-weight: 800; 
-            opacity: 0.9; 
-            margin-top: 2px; 
-            letter-spacing: 0.3px; 
+
+        .btn-main b {
+            font-size: 17px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .btn-main span {
+            font-size: 11px;
+            font-weight: 800;
+            opacity: 0.95;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
         }
 
         .btn-sub {
@@ -215,78 +277,146 @@
             border: 1px solid rgba(255,255,255,0.08);
             color: #fff;
         }
-        .btn-sub b { font-size: 15px; font-weight: 800; }
-        .btn-sub span { 
-            font-size: 11px; 
-            opacity: 0.6; 
-            margin-top: 1px; 
+
+        .btn-sub:hover {
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .btn-sub b {
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .btn-sub span {
+            font-size: 11px;
+            opacity: 0.68;
+            margin-top: 1px;
         }
 
         .btn-gold {
             background: rgba(255, 184, 0, 0.1);
             border: 1px solid rgba(255, 184, 0, 0.3);
             color: var(--gold);
-            margin-bottom: 0;
+        }
+
+        .btn-support {
+            background: var(--support);
+            border: 1px solid var(--support-border);
+            color: var(--support-text);
+        }
+
+        .btn-support:hover {
+            border-color: rgba(255,255,255,0.22);
+            box-shadow: 0 8px 22px rgba(255,255,255,0.06);
         }
 
         .btn-main::after {
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: -100%; 
-            width: 50%; 
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transform: skewX(-25deg);
             animation: shine 4s infinite;
         }
 
-        @keyframes shine { 
-            0% { left: -100%; } 
-            20% { left: 160%; } 
-            100% { left: 160%; } 
+        .pop {
+            animation: pop-anim 0.4s ease;
         }
-        @keyframes blink { 
-            0%, 100% { opacity: 1; } 
-            50% { opacity: 0.5; } 
+
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 160%; }
+            100% { left: 160%; }
         }
-        
-        .pop { 
-            animation: pop-anim 0.4s ease; 
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
-        @keyframes pop-anim { 
-            0% { transform: scale(1); } 
-            50% { transform: scale(1.1); } 
-            100% { transform: scale(1); } 
+
+        @keyframes pop-anim {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulse-main {
+            0%, 100% { transform: translateZ(0); }
+            50% { transform: scale(1.01); }
+        }
+
+        @media (max-width: 420px) {
+            .top-info {
+                top: 18px;
+                left: 14px;
+                right: 14px;
+                font-size: 10px;
+            }
+
+            .wrapper {
+                padding: 18px 14px calc(22px + env(safe-area-inset-bottom));
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .sub-text {
+                font-size: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dot,
+            .btn-main::after,
+            .btn-main,
+            .pop {
+                animation: none !important;
+            }
+
+            .cta-btn,
+            .item,
+            .lang-btn {
+                transition: none !important;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="bg-layer"></div>
-<div class="gradient-overlay"></div>
+<div class="bg-layer" aria-hidden="true"></div>
+<div class="gradient-overlay" aria-hidden="true"></div>
 
 <div class="top-info">
-    <div class="online"><div class="dot"></div> <span id="viewers">107</span> <span id="viewers-suffix">СМОТРЯТ СЕЙЧАС</span></div>
-    
+    <div class="online">
+        <div class="dot"></div>
+        <span id="viewers">107</span>
+        <span id="viewers-suffix">СМОТРЯТ СЕЙЧАС</span>
+    </div>
+
     <div style="display: flex; align-items: center; gap: 16px;">
         <div style="opacity: 0.6" id="privacy-text">PRIVACY: ON</div>
         <div class="lang-switcher">
-            <button class="lang-btn active" data-lang="ru">🇷🇺 RU</button>
-            <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+            <button class="lang-btn active" data-lang="ru" type="button">🇷🇺 RU</button>
+            <button class="lang-btn" data-lang="en" type="button">🇬🇧 EN</button>
         </div>
     </div>
 </div>
 
 <div class="wrapper">
     <div class="location-tag" id="location-text">📍 ТЫ РЯДОМ СО МНОЙ?</div>
-    
+
     <h1 id="h1-text">ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span> 18+</h1>
-    
+
     <div class="sub-text" id="sub-text">
         Залила свежий архив без цензуры.<br>
         <b>Бесплатно для первых посетителей сегодня.</b>
     </div>
+
+    <div class="trust-line" id="trust-line-text">⚡ Обновляется регулярно • быстрый доступ</div>
 
     <div class="grid">
         <div class="item"><img src="https://i.postimg.cc/WzJ1qrtv/1439531113-984653832.jpg" alt="Preview"><div class="lock-icon">🔒</div></div>
@@ -304,6 +434,11 @@
         <b id="gold-btn-text">МОЙ ПРОМОКОД НА 5000₽ 🎁</b>
         <span id="gold-sub-text">Забирай бонус и играй со мной</span>
     </a>
+
+    <a href="https://pay.cloudtips.ru/p/e0d35466" class="btn-sub btn-support cta-btn" id="support-link" target="_blank" rel="noopener noreferrer">
+        <b id="support-btn-text">СПОНСОРСТВО МОЕГО БЕЗУМИЯ ❤️</b>
+        <span id="support-sub-text">Поддержать меня напрямую</span>
+    </a>
 </div>
 
 <audio id="push-sound" preload="auto">
@@ -319,9 +454,12 @@
             location: "📍 ТЫ РЯДОМ СО МНОЙ?",
             h1: "ВХОД ТОЛЬКО<br>ДЛЯ <span>СВОИХ</span> 18+",
             subText: "Залила свежий архив без цензуры.<br><b>Бесплатно для первых посетителей сегодня.</b>",
+            trustLine: "⚡ Обновляется регулярно • быстрый доступ",
             mainBtn: "СМОТРЕТЬ БЕЗ ЦЕНЗУРЫ 🔥",
             goldBtn: "МОЙ ПРОМОКОД НА 5000₽ 🎁",
             goldSub: "Забирай бонус и играй со мной",
+            supportBtn: "СПОНСОРСТВО МОЕГО БЕЗУМИЯ ❤️",
+            supportSub: "Поддержать меня напрямую",
             placesStages: [
                 { text: "ОСТАЛОСЬ 7 БЕСПЛАТНЫХ МЕСТ", color: "#ffeb3b" },
                 { text: "ОСТАЛОСЬ 5 БЕСПЛАТНЫХ МЕСТ", color: "#ffeb3b" },
@@ -334,9 +472,12 @@
             location: "📍 ARE YOU NEAR ME?",
             h1: "ACCESS ONLY<br>FOR <span>YOUR OWN</span> 18+",
             subText: "Uploaded a fresh uncensored archive.<br><b>Free for the first visitors today.</b>",
+            trustLine: "⚡ Updated regularly • fast access",
             mainBtn: "WATCH UNCENSORED 🔥",
             goldBtn: "MY $60 BONUS CODE 🎁",
             goldSub: "Claim the bonus and play with me",
+            supportBtn: "SPONSOR MY MADNESS ❤️",
+            supportSub: "Support me directly",
             placesStages: [
                 { text: "7 FREE SPOTS LEFT", color: "#ffeb3b" },
                 { text: "5 FREE SPOTS LEFT", color: "#ffeb3b" },
@@ -355,15 +496,34 @@
     const locationEl = document.getElementById('location-text');
     const h1El = document.getElementById('h1-text');
     const subEl = document.getElementById('sub-text');
+    const trustLineEl = document.getElementById('trust-line-text');
     const mainBtnText = document.getElementById('main-btn-text');
     const placesEl = document.getElementById('places-text');
     const goldBtnText = document.getElementById('gold-btn-text');
     const goldSubText = document.getElementById('gold-sub-text');
+    const supportBtnText = document.getElementById('support-btn-text');
+    const supportSubText = document.getElementById('support-sub-text');
     const sound = document.getElementById('push-sound');
     const mainLink = document.getElementById('main-link');
+    const supportLink = document.getElementById('support-link');
+
+    function safeStorageGet(key) {
+        try {
+            return localStorage.getItem(key);
+        } catch (_) {
+            return null;
+        }
+    }
+
+    function safeStorageSet(key, value) {
+        try {
+            localStorage.setItem(key, value);
+        } catch (_) {}
+    }
 
     function switchLanguage(lang) {
         if (!translations[lang]) return;
+
         currentLang = lang;
         const t = translations[lang];
 
@@ -371,27 +531,29 @@
         locationEl.innerHTML = t.location;
         h1El.innerHTML = t.h1;
         subEl.innerHTML = t.subText;
+        trustLineEl.textContent = t.trustLine;
         mainBtnText.textContent = t.mainBtn;
         goldBtnText.textContent = t.goldBtn;
         goldSubText.textContent = t.goldSub;
+        supportBtnText.textContent = t.supportBtn;
+        supportSubText.textContent = t.supportSub;
 
         updatePlacesText();
 
-        document.querySelectorAll('.lang-btn').forEach(btn => {
+        document.querySelectorAll('.lang-btn').forEach((btn) => {
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
 
-        localStorage.setItem('preferredLang', lang);
+        safeStorageSet('preferredLang', lang);
     }
 
     function updatePlacesText() {
         const t = translations[currentLang];
-        if (stage < t.placesStages.length) {
-            const current = t.placesStages[stage];
-            placesEl.innerText = current.text;
-            if (current.color) placesEl.style.color = current.color;
-            if (current.weight) placesEl.style.fontWeight = current.weight;
-        }
+        const current = t.placesStages[Math.min(stage, t.placesStages.length - 1)];
+
+        placesEl.innerText = current.text;
+        placesEl.style.color = current.color || '';
+        placesEl.style.fontWeight = current.weight || '800';
     }
 
     function updateViewers() {
@@ -399,14 +561,16 @@
         viewers = Math.max(92, Math.min(165, viewers + change));
         viewersEl.innerText = viewers;
         viewersEl.classList.add('pop');
-        setTimeout(() => viewersEl.classList.remove('pop'), 400);
+
+        setTimeout(() => {
+            viewersEl.classList.remove('pop');
+        }, 400);
     }
 
     function playNotification() {
-        if (sound) {
-            sound.currentTime = 0;
-            sound.play().catch(() => {});
-        }
+        if (!sound) return;
+        sound.currentTime = 0;
+        sound.play().catch(() => {});
     }
 
     function triggerPlaceUpdate() {
@@ -415,12 +579,42 @@
         updatePlacesText();
         mainLink.classList.add('pop');
         playNotification();
-        setTimeout(() => mainLink.classList.remove('pop'), 420);
+
+        setTimeout(() => {
+            mainLink.classList.remove('pop');
+        }, 420);
+    }
+
+    function initGalleryClicks() {
+        document.querySelectorAll('.grid .item').forEach((item) => {
+            item.addEventListener('click', () => {
+                playNotification();
+                window.open('https://t.me/+JP-STmmmSH1mZThi', '_blank', 'noopener,noreferrer');
+            });
+        });
+    }
+
+    function initLangButtons() {
+        document.querySelectorAll('.lang-btn').forEach((btn) => {
+            btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+        });
+    }
+
+    function initAudioUnlock() {
+        let audioUnlocked = false;
+
+        document.body.addEventListener('touchstart', () => {
+            if (!audioUnlocked && sound) {
+                sound.muted = false;
+                audioUnlocked = true;
+            }
+        }, { once: true, passive: true });
     }
 
     function init() {
-        const savedLang = localStorage.getItem('preferredLang') || 
-                         (navigator.language.startsWith('ru') ? 'ru' : 'en');
+        const savedLang = safeStorageGet('preferredLang') ||
+            (navigator.language && navigator.language.toLowerCase().startsWith('ru') ? 'ru' : 'en');
+
         switchLanguage(savedLang);
 
         setTimeout(triggerPlaceUpdate, 6500);
@@ -429,29 +623,15 @@
 
         setInterval(updateViewers, 3500);
 
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
-        });
-
-        let audioUnlocked = false;
-        document.body.addEventListener('touchstart', () => {
-            if (!audioUnlocked && sound) {
-                sound.muted = false;
-                audioUnlocked = true;
-            }
-        }, { once: true });
+        initLangButtons();
+        initAudioUnlock();
+        initGalleryClicks();
 
         mainLink.addEventListener('click', playNotification);
-
-        // === ДОБАВЛЕНО: Клик по любой из 4 фото открывает Telegram ===
-        document.querySelectorAll('.grid .item').forEach(item => {
-            item.addEventListener('click', () => {
-                window.open('https://t.me/+JP-STmmmSH1mZThi', '_blank', 'noopener,noreferrer');
-            });
-        });
+        supportLink.addEventListener('click', playNotification);
     }
 
-    window.onload = init;
+    document.addEventListener('DOMContentLoaded', init);
 </script>
 
 </body>
